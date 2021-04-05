@@ -12,5 +12,5 @@
 添加微信：baohuikf，输入验证：抢购助手，添加好友邀请入群  
    
 # 软件界面  
-![](https://github.com/vvxxvv/qg/blob/main/qg.png)  
-![](https://github.com/vvxxvv/qg/blob/main/bp.png)  
+![](https://github.com/omxmo/qg/blob/main/qg.png)  
+![](https://github.com/omxmo/qg/blob/main/bp.png)  
