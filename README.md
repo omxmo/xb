@@ -15,4 +15,4 @@
 ![](https://github.com/omxmo/qg/blob/main/qg.png)  
 ![](https://github.com/omxmo/qg/blob/main/bp.png)  
   
-# 欢迎Star
+# 欢迎Star  
