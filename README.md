@@ -15,4 +15,7 @@
 ![](https://github.com/omxmo/qg/blob/main/qg.png)  
 ![](https://github.com/omxmo/qg/blob/main/bp.png)  
   
+# 申明 
+仅供学习交流，严禁用于违法商业活动
+  
 # 欢迎Star  
