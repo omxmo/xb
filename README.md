@@ -1,5 +1,5 @@
 # 最新活动  
-最高领618元天猫红包：[快点击领取天猫红包](https://s.click.taobao.com/2kYADnu "点击链接")  
+最高领618元天猫红包：[点击领取天猫红包](https://s.click.taobao.com/2kYADnu "点击链接")  
 最高领18618元京东红包：[点击领取京东红包](https://u.jd.com/zFr6e8y "点击链接")   
    
 # 抢购助手  
