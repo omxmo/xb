@@ -9,8 +9,6 @@
 由于这里上传下载太慢，最新版本软件下载，详见QQ群/微信群公告下载链接，长期优化更新  
 ### QQ群 
 点击链接加入：[QQ群](https://jq.qq.com/?_wv=1027&k=8rmAofkO "点击链接")  
-### 微信群 
-添加微信：baohuikf，输入验证：抢购助手，添加好友邀请入群  
    
 # 软件界面  
 ![](https://github.com/omxmo/qg/blob/main/qg.png)  
