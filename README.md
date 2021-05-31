@@ -10,6 +10,6 @@
 ![](https://github.com/omxmo/qg/blob/main/bp.png)  
   
 # 申明 
-仅供学习交流，严禁用于违法商业活动
+仅供测试和学习交流，严禁用于商业和违法活动
   
 # 欢迎Star  
