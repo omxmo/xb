@@ -1,4 +1,4 @@
-### 抢购线报QQ群：[点击链接加入线报QQ群](https://jq.qq.com/?_wv=1027&k=8rmAofkO "点击链接")  
+### 抢购线报QQ群：[点击链接加入QQ群](https://jq.qq.com/?_wv=1027&k=8rmAofkO "点击链接")  
   
 ## 软件下载地址：[点击链接下载软件](https://www.lanzoui.com/b01br9o6j "点击链接")    
    
