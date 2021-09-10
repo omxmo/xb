@@ -1,7 +1,3 @@
-# 免费饿了么/美团外卖会员  
-使用[喵惠APP](https://a.app.qq.com/o/simple.jsp?pkgname=com.miaohui.xin "点击链接")领取外卖红包，在饿了么/美团上面点外卖，收到外卖后即可联系客服领取1个月外卖会员，直充到自己的账号！  
-领取暗号：外卖会员！  
-   
 # 下载地址  
 #### 下载链接：[点击下载](https://www.lanzoui.com/b01cfbrbi "点击链接")  
   
