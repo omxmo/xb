@@ -1,4 +1,5 @@
-# 新增支持自动完成天猫/京东双11任务，领取奖励
+### 新增支持自动完成天猫/京东双11任务，领取奖励  
+![](https://github.com/omxmo/qg/blob/main/1111.png)  
   
 # 下载地址  
 #### 下载链接：[点击下载链接](https://www.lanzoui.com/b01cfbrbi "点击链接")  
