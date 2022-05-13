@@ -1,5 +1,5 @@
 # 下载地址  
-#### 下载链接：[点击链接](https://www.lanzoui.com/b01cfbrbi "点击链接")  
+#### 下载链接：[点击下载链接](https://www.lanzoui.com/b01cfbrbi "点击链接")  
   
 #### 软件使用互助交流/抢购线报QQ群：[点击加入QQ群](https://jq.qq.com/?_wv=1027&k=TkImzAX0 "点击链接")  
    
