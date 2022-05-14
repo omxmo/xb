@@ -1,7 +1,7 @@
 - 长期更新不易，记得 `Fork` 和 `Star` 
 
   
-软件使用互助交流/抢购线报QQ群：[点击加入QQ群](https://jq.qq.com/?_wv=1027&k=TkImzAX0 "点击链接")  
+软件 `下载` 和使用互助交流QQ群：[点击加入QQ群](https://jq.qq.com/?_wv=1027&k=TkImzAX0 "点击链接")  
 微信群，扫码添加微信邀请加入，备注：抢购助手  
 ![](https://github.com/omxmo/xb/blob/main/wx.png)
 
@@ -20,9 +20,6 @@
 |百亿补贴模式|||酒仙网||
 |直播|||多点||
 |刷屏|||华润||
-
-### 下载地址
-下载链接：[点击链接](https://www.lanzoui.com/b01cfbrbi "点击链接")  
    
 ### 软件界面  
 ![](https://github.com/omxmo/qg/blob/main/qg.png)  
