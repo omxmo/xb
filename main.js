@@ -15,20 +15,11 @@ ui.layout(
 					
 					<frame w="*" margin="10" h="1" bg="#ff8080" />
 					
-				    <button id="tmnhj" text="每天领取天猫6666元红包" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
-					<button id="jdnhj" text="每天领取京东9999元红包" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
 					<button id="youhuiquan" text="淘宝/京东/拼多多内部优惠券+饿了么/美团外卖红包" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
-					<button id="hxz" text="滴滴旗下花小猪打车100元券包" margin="10 3"/>
+					<button id="tthb" text="免费领淘特1分钱包邮商品" margin="10 3"/>
+					<button id="hxzhb" text="免费领滴滴旗下花小猪打车100元券包" margin="10 3"/>
 					
 					<frame w="*" margin="10" h="1" bg="#ff8080" />
-					
-					<card id="start_nhj" w="*" h="70" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" gravity="center_vertical">
-                        <vertical padding="18 8" h="auto">
-                            <text text="年货节任务助手" textColor="#222222" textSize="16sp"/>
-                            <text text="支持自动完成京东年货节任务领取奖励" textColor="#999999" textSize="14sp"/>
-                        </vertical>
-                    <View bg="#ff2d2d" h="*" w="10"/>
-                    </card>
 					
 				    <card id="qg_main" w="*" h="70" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" gravity="center_vertical">
                         <vertical padding="18 8" h="auto">
@@ -64,7 +55,7 @@ ui.layout(
                 </frame>
                 <frame>
 				    <vertical>
-                     <text margin="10 5" w="*" gravity="center" textSize="18sp">喵惠助手V1.1.8</text>
+                     <text margin="10 5" w="*" gravity="center" textSize="18sp">喵惠助手V1.2.2</text>
 					 <text margin="10 5">喵惠助手是一款基于安卓系统的辅助脚本工具，模拟人工在手机屏幕上点击，实现自动化操作，方便、快捷、安全，没有任何病毒。</text>
 					 <text margin="10 5">部分功能是整合互联网已有开源包和工具。</text>
 					 <text margin="10 5">长期优化更新，更多功能陆续增加中……获取源码以及软件定制请联系作者。</text>
@@ -111,22 +102,18 @@ ui.emitter.on("resume", function() {
 //此时根据无障碍服务的开启情况，同步开关的状态 
 ui.autoService.checked = auto.service != null;    }); 
 
-//双11红包//////////
-ui.tmnhj.click(function(){
-app.openUrl("https://m.tb.cn/h.fQZbteM")
-});
-
-ui.jdnhj.click(function(){
-app.openUrl("https://u.jd.com/YIoOWrW")
-});
 
 
 ui.youhuiquan.click(function(){
 app.openUrl("https://resoumen.com/u/")
 });
 
-ui.hxz.click(function(){
-app.openUrl("https://v.didi.cn/bPj2v8e?source_id=c6f75f4672793ef3fea386c59d679ba2")
+ui.tthb.click(function(){
+app.openUrl("https://m.tb.cn/h.fO5esWW")
+});
+
+ui.hxzhb.click(function(){
+app.openUrl("https://v.didi.cn/bPj2v8e?source_id=eHZkZlJuSjVQdlArbzRiRm5XZWJvZz09")
 });
 
 
@@ -140,11 +127,6 @@ ui.syjc.click(function(){
 app.openUrl("https://docs.qq.com/doc/DU0FTQ1NKV0VKU2tN")
 });
 
-
-//年货节
-ui.start_nhj.on("click", () => {
-    engines.execScriptFile("start_nhj.js");
-});
 
 //抢购功能
 ui.qg_main.on("click", () => {
