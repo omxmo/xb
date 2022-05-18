@@ -1,7 +1,7 @@
-- 更新不易，谢谢 `Fork` 和 `Star` 
+- 长期更新不易，谢谢 `Fork` 和 `Star` 
 
 ##### 软件下载
-软件 `下载` 和 `使用` 互助交流请加群！  
+各种软件 `下载` 和 `使用` 互助交流请加群！  
 QQ群：[点击加入](https://jq.qq.com/?_wv=1027&k=TkImzAX0 "点击链接")  
 微信群，扫码添加微信邀请加入，备注：抢购助手  
 ![](https://github.com/omxmo/xb/blob/main/wx.png)
