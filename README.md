@@ -6,7 +6,7 @@ QQ群：[点击加入](https://jq.qq.com/?_wv=1027&k=TkImzAX0 "点击链接")
 微信群，扫码添加微信邀请加入，备注：抢购助手  
 ![](https://github.com/omxmo/xb/blob/main/wx.png)  
 
-###抢购秒杀项目集合
+### 抢购秒杀项目集合
 |项目名称|最后更新时间|链接|
 | :------------: | :------------: | :------------: |
 |九价疫苗秒杀WPF|5月17日|[点击链接](https://github.com/SinnoSong/SecKill)|
