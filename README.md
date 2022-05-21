@@ -9,6 +9,7 @@ QQ群：[点击加入](https://jq.qq.com/?_wv=1027&k=TkImzAX0 "点击链接")
 ### 抢购秒杀项目集合
 |项目名称|最后更新时间|链接|
 | :------------: | :------------: | :------------: |
+|叮咚买菜抢购|5月21日|[点击链接](https://github.com/xiaorui16888/DingDongHelper)|
 |山姆全自动抢购|5月21日|[点击链接](https://github.com/sari3l/sams_helper)|
 |九价疫苗秒杀WPF|5月17日|[点击链接](https://github.com/SinnoSong/SecKill)|
 |山姆抢购|5月16日|[点击链接](https://github.com/robGoods/sams)|
