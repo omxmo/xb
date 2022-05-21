@@ -2,7 +2,7 @@
 
 ##### 软件下载
 各种抢购软件 `下载` 和 `使用` 互助交流、最新抢购线报请加群！  
-QQ群：[点击加入](https://jq.qq.com/?_wv=1027&k=TkImzAX0 "点击链接")  
+QQ群：[加入](https://jq.qq.com/?_wv=1027&k=TkImzAX0 "点击链接")  
 微信群，扫码添加微信邀请加入，备注：抢购助手  
 ![](https://github.com/omxmo/xb/blob/main/wx.png)  
 
