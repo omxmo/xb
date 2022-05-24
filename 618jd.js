@@ -1,14 +1,14 @@
 if (!auto.service) {
-    toast('无障碍服务未启动，退出！')
+    toast('无障碍服务未启动，退出')
     exit()
 }
 
-if (confirm('是否需要自动调整媒体音量为0', '以免直播任务发出声音，调整需要修改系统设置权限')) {
+if (confirm('是否需要自动调整媒体音量为0', '以免直播任务发出声音，需要修改系统设置权限')) {
     try {
         device.setMusicVolume(0)
         toast('成功设置媒体音量为0')
     } catch (err) {
-        alert('需要开启权限，请先开启后再运行助手')
+        alert('首先需要开启权限，请开启后再次运行助手')
         exit()
     }
 } else {
@@ -19,7 +19,7 @@ let join = confirm('是否自动完成入会任务？', '入会将会自动授�
 
 console.show()
 console.log('开始完成京东任务...')
-console.log('按音量减键停止任务')
+console.log('按音量下键停止')
 
 device.keepScreenDim(30 * 60 * 1000) // 防止息屏30分钟
 
@@ -33,7 +33,7 @@ function quit() {
 function registerKey() {
     events.observeKey()
     events.onKeyDown('volume_down', function (event) {
-        console.log('京东任务脚本停止了')
+        console.log('京东任务助手停止了')
         console.log('请手动切换回主页面')
         quit()
     })
@@ -64,7 +64,7 @@ function openAndInto() {
 
     app.startActivity({
         action: "VIEW",
-        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JdqLePD","M_sourceFrom":"mxz","msf_type":"auto"}'
+        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JMg0sLH","M_sourceFrom":"mxz","msf_type":"auto"}'
     })
 }
 
@@ -73,7 +73,7 @@ function openTaskList() {
     console.log('打开任务列表')
     let taskListButtons = textMatches(/.*消耗.*/).findOne(20000)
     if (!taskListButtons) {
-        console.log('未能打开任务列表，请关闭京东APP重新运行！')
+        console.log('未能打开任务列表，请关闭京东重新运行')
         quit()
     }
     taskListButtons = taskListButtons.parent().parent().parent().parent().children()
@@ -97,7 +97,7 @@ function openTaskList() {
         quit()
     }
     taskListButton.click()
-    if (!textMatches(/.*累计任务奖.*/).findOne(8000)) {
+    if (!textMatches(/.*累计任务奖.*|.*当前进度.*|.*赚金币.*/).findOne(8000)) {
         console.log('似乎没能打开任务列表，退出')
         quit()
     }
@@ -155,9 +155,11 @@ function getTaskByText() {
 
 // 返回任务列表并检查是否成功，不成功重试一次，带有延时
 function backToList() {
+    sleep(500)
     back()
     let r = findTextDescMatchesTimeout(/.*累计任务奖.*/, 8000)
     if (!r) {
+        console.log('返回失败，重试返回')
         back()
     }
     sleep(3000)
@@ -175,7 +177,7 @@ function timeTask() {
         c++
     }
     if (c > 39) {
-        console.log('未检测到任务完成标识。')
+        console.log('未检测到任务完成标识')
         return false
     }
     return true
@@ -228,7 +230,7 @@ function joinTask() {
             console.show()
             return true
         } catch (err) {
-            console.log('入会任务出现异常！停止完成入会任务。', err)
+            console.log('入会任务出现异常，停止完成入会任务', err)
             join = 0
             sleep(500)
             console.show()
@@ -276,7 +278,7 @@ function shopTask() {
     console.log('等待进入店铺列表...')
     let banner = textContains('喜欢').findOne(10000)
     if (!banner) {
-        console.log('未能进入店铺列表。返回。')
+        console.log('未能进入店铺列表，返回')
         return false
     }
     let c = banner.text().match(/(\d)\/(\d*)/)
@@ -381,23 +383,28 @@ function doTask(tButton, tText) {
 
 // 全局try catch，应对无法显示报错
 try {
-    if (confirm('是否自动打开京东进入活动')) {
+    if (confirm('是否自动打开京东进入活动', '适用于多开或任务列表无法自动打开的情况')) {
         openAndInto()
+        console.log('等待活动页面加载')
+        if (!findTextDescMatchesTimeout(/.*去使用奖励.*/, 8000)) {
+            console.log('未能进入活动，请重新运行')
+            quit()
+        }
+        console.log('成功进入活动')
+        sleep(2000)
+
+        openTaskList();
+        sleep(5000)
     } else {
-        alert('请关闭弹窗后立刻手动打开京东APP并进入活动页面')
-        console.log('请手动打开京东APP并进入活动页面')
+        alert('请关闭弹窗后立刻手动打开京东APP进入活动页面，并打开任务列表', '限时20秒')
+        console.log('请手动打开京东APP进入活动页面，并打开任务列表')
+        if (!textMatches(/.*累计任务奖.*|.*当前进度.*|.*赚金币.*/).findOne(20000)) {
+            console.log('未能进入活动，请重新运行！')
+            quit()
+        }
+        console.log('成功进入活动')
+        sleep(2000)
     }
-
-    console.log('等待活动页面加载')
-    if (!findTextDescMatchesTimeout(/.*去使用奖励.*/, 20000)) {
-        console.log('未能进入活动，请重新运行！')
-        quit()
-    }
-    console.log('成功进入活动')
-    sleep(2000)
-
-    openTaskList();
-    sleep(5000)
 
     // 完成所有任务的循环
     while (true) {
