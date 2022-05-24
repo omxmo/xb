@@ -1,11 +1,48 @@
 if (!auto.service) {
-    toast('无障碍服务未启动，退出')
+    toast('无障碍服务未启动，即将退出！')
     exit()
 }
 
-let autoOpen = confirm('是否自动打开京东进入活动？', '适用于多开或任务列表无法自动打开的情况')
+console.show()
 
-if (confirm('是否需要自动调整媒体音量为0？', '以免直播任务发出声音，需要修改系统设置权限')) {
+function getSetting() {
+    let indices = []
+    autoOpen && indices.push(0)
+    autoMute && indices.push(1)
+    autoJoin && indices.push(2)
+
+    let settings = dialogs.multiChoice('任务设置', ['自动打开京东进入活动，多开或任务列表无法自动打开时取消勾选', '自动调整媒体音量为0，以免直播任务发出声音，首次选择需要修改系统设置权限', '自动完成入会任务，京东将授权手机号给商家，日后可能会收到推广短信'], indices)
+
+    if (settings.indexOf(0) != -1) {
+        storage.put('autoOpen', true)
+        autoOpen = true
+    } else {
+        storage.put('autoOpen', false)
+        autoOpen = false
+    }
+    if (settings.indexOf(1) != -1) {
+        storage.put('autoMute', true)
+        autoMute = true
+    } else {
+        storage.put('autoMute', false)
+        autoMute = false
+    }
+    if (settings.indexOf(2) != -1) {
+        storage.put('autoJoin', true)
+        autoJoin = true
+    } else {
+        storage.put('autoJoin', false)
+        autoJoin = false
+    }
+}
+
+let storage = storages.create("jd_task");
+let autoOpen = storage.get('autoOpen', true)
+let autoMute = storage.get('autoMute', true)
+let autoJoin = storage.get('autoJoin', true)
+getSetting()
+
+if (autoMute) {
     try {
         device.setMusicVolume(0)
         toast('成功设置媒体音量为0')
@@ -13,13 +50,8 @@ if (confirm('是否需要自动调整媒体音量为0？', '以免直播任务�
         alert('首先需要开启权限，请开启后再次运行助手')
         exit()
     }
-} else {
-    toast('不修改媒体音量')
 }
 
-let join = confirm('是否自动完成入会任务？', '入会将会自动授权手机号给京东商家')
-
-console.show()
 console.log('开始完成京东任务...')
 console.log('按音量减键停止')
 
@@ -75,7 +107,7 @@ function openTaskList() {
     console.log('打开任务列表')
     let taskListButtons = text('消耗').findOne(20000)
     if (!taskListButtons) {
-        console.log('未能打开任务列表，请关闭京东重新运行')
+        console.log('未能打开任务列表，请关闭京东APP重新运行')
         quit()
     }
     taskListButtons = taskListButtons.parent().parent().parent().parent().children()
@@ -99,8 +131,16 @@ function openTaskList() {
         quit()
     }
     taskListButton.click()
-    if (!findTextDescMatchesTimeout(/.*累计任务奖.*|.*当前进度.*|.*赚金币.*/, 8000)) {
-        console.log('似乎没能打开任务列表，退出')
+    if (!findTextDescMatchesTimeout(/累计任务奖励/, 10000)) {
+        console.log('似乎没能打开任务列表，使用备用方法尝试')
+        let taskButtons = textMatches(/.*浏览并关注.*|.*浏览.*s.*|.*累计浏览.*|.*浏览可得.*|.*逛晚会.*|.*品牌墙.*|.*打卡.*/).findOne(8000)
+        if (!taskButtons) {
+            console.log(currentActivity())
+            console.log('实在是无法检测到任务列表，即将退出！')
+        } else {
+            console.log('找到任务列表，继续')
+            return
+        }
         quit()
     }
 }
@@ -108,7 +148,7 @@ function openTaskList() {
 // 关闭任务列表
 function closeTaskList() {
     console.log('关闭任务列表')
-    let jiangli = text('累计任务奖励').findOne(5000)
+    let jiangli = findTextDescMatchesTimeout(/累计任务奖励/).findOne(5000)
     if (!jiangli) {
         console.log('无法找到任务奖励标识')
         return false
@@ -133,24 +173,23 @@ function getTaskByText() {
         tTitle = null
     console.log('寻找未完成任务...')
     let taskButtons = textMatches(/.*浏览并关注.*|.*浏览.*s.*|.*累计浏览.*|.*浏览可得.*|.*逛晚会.*|.*品牌墙.*|.*打卡.*/).find()
-    if (taskButtons.empty()) { // 找不到任务，直接返回
-        return [null, null, 0]
-    }
-    for (let i = 0; i < taskButtons.length; i++) {
-        let item = taskButtons[i]
-        tTitle = item.parent().child(1).text()
-        let r = tTitle.match(/(\d)\/(\d*)/)
-        if (!r) continue
-
-        tCount = (r[2] - r[1])
-
-        console.log(tTitle, tCount)
-        if (tCount) { // 如果数字相减不为0，证明没完成
-            tText = item.text()
-            if (!join && tText.match(/成功入会/)) continue
-            if (tText.match(/下单/)) continue
-            tButton = item.parent().child(3)
-            break
+    if (!taskButtons.empty()) { // 如果找不到任务，直接返回
+        for (let i = 0; i < taskButtons.length; i++) {
+            let item = taskButtons[i]
+            tTitle = item.parent().child(1).text()
+            let r = tTitle.match(/(\d)\/(\d*)/)
+            if (!r) continue
+    
+            tCount = (r[2] - r[1])
+    
+            console.log(tTitle, tCount)
+            if (tCount) { // 如果数字相减不为0，证明没完成
+                tText = item.text()
+                if (!autoJoin && tText.match(/成功入会/)) continue
+                if (tText.match(/下单/)) continue
+                tButton = item.parent().child(3)
+                break
+            }
         }
     }
     return [tButton, tText, tCount, tTitle]
@@ -160,8 +199,8 @@ function getTaskByText() {
 function backToList() {
     sleep(500)
     back()
-    for (let i = 0; i < 2; i++) { // 尝试返回2次
-        if (!findTextDescMatchesTimeout(/.*累计任务奖.*|.*当前进度.*|.*赚金币.*/, 8000)) {
+    for (let i = 0; i < 3; i++) { // 尝试返回3次
+        if (!findTextDescMatchesTimeout(/累计任务奖励/, 5000)) {
             console.log('返回失败，重试返回')
             back()
             continue
@@ -179,7 +218,7 @@ function timeTask() {
     while (c < 40) { // 0.5 * 40 = 20 秒，防止死循环
         if ((textMatches(/获得.*?金币/).exists() || descMatches(/获得.*?金币/).exists())) // 等待已完成出现
             break
-        if ((textMatches(/已达上限/).exists() || descMatches(/已达上限/).exists())) {// 失败
+        if ((textMatches(/已达上限/).exists() || descMatches(/已达上限/).exists())) { // 失败
             console.log('上限，返回刷新任务列表')
             return false
         }
@@ -195,7 +234,7 @@ function timeTask() {
         c++
     }
     if (c > 39) {
-        console.log('未检测到任务完成标识。')
+        console.log('未检测到任务完成标识')
         return false
     }
     return true
@@ -203,18 +242,18 @@ function timeTask() {
 
 // 入会任务
 function joinTask() {
-    let check = textMatches(/.*确认授权即同意.*|.*我的特权.*|.*立即开卡.*/).findOne(8000)
+    let check = textMatches(/.*确认授权即同意.*|.*我的特权.*|.*立即开卡.*|.*解锁全部会员福利.*/).findOne(8000)
     if (!check) {
         console.log('无法找到入会按钮，判定为已经入会')
-        return false
+        return true
     } else if (check.text().match(/我的特权/)) {
         console.log('已经入会，返回')
         return true
     } else {
         sleep(2000)
-        if (check.text().match(/立即开卡/)) {
+        if (check.text().match(/.*立即开卡.*|.*解锁全部会员福利.*/)) {
             let btn = check.bounds()
-            console.log('即将点击开卡，自动隐藏控制台')
+            console.log('即将点击开卡/解锁福利，自动隐藏控制台')
             console.hide()
             sleep(500)
             click(btn.centerX(), btn.centerY())
@@ -232,7 +271,7 @@ function joinTask() {
         } else {
             check = check.parent().parent().child(5).bounds()
         }
-        
+
         console.log('即将勾选授权，自动隐藏控制台', check)
         console.hide()
         sleep(500)
@@ -250,7 +289,7 @@ function joinTask() {
             return true
         } catch (err) {
             console.log('入会任务出现异常，停止完成入会任务', err)
-            join = 0
+            autoJoin = 0
             sleep(500)
             console.show()
             return false
@@ -262,7 +301,7 @@ function joinTask() {
 function itemTask(cart) {
     console.log('等待进入商品列表...')
     if (!textContains('当前页').findOne(10000)) {
-        console.log('未能进入商品列表。')
+        console.log('未能进入商品列表')
         return false
     }
     sleep(2000)
@@ -406,7 +445,7 @@ try {
         openAndInto()
         console.log('等待活动页面加载')
         if (!findTextDescMatchesTimeout(/.*去使用奖励.*/, 8000)) {
-            console.log('未能进入活动，请重新运行')
+            console.log('未能进入活动，请重新运行！')
             quit()
         }
         console.log('成功进入活动')
@@ -415,9 +454,9 @@ try {
         openTaskList();
         sleep(5000)
     } else {
-        alert('请关闭弹窗后立刻手动打开京东APP进入活动页面，并打开任务列表', '限时20秒')
+        alert('请关闭弹窗后立刻手动打开京东APP进入活动页面，并打开任务列表', '限时30秒')
         console.log('请手动打开京东APP进入活动页面，并打开任务列表')
-        if (!findTextDescMatchesTimeout(/.*累计任务奖.*|.*当前进度.*|.*赚金币.*/, 20000)) {
+        if (!findTextDescMatchesTimeout(/累计任务奖励/, 30000)) {
             console.log('未能进入活动，请重新运行！')
             quit()
         }
