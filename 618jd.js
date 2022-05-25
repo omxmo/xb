@@ -11,7 +11,7 @@ function getSetting() {
     autoMute && indices.push(1)
     autoJoin && indices.push(2)
 
-    let settings = dialogs.multiChoice('任务设置', ['自动打开京东进入活动，多开或任务列表无法自动打开时取消勾选', '自动调整媒体音量为0，以免直播任务发出声音，首次选择需要修改系统设置权限', '自动完成入会任务，京东将授权手机号给商家，可能会收到推广短信'], indices)
+    let settings = dialogs.multiChoice('任务设置', ['自动打开京东进入活动，多开或任务列表无法自动打开时取消勾选', '自动调整媒体音量为0，以免直播任务发出声音，首次选择需要修改系统设置权限', '自动完成入会任务，京东将授权手机号给商家，可能会收到商家推广短信'], indices)
 
     if (settings.indexOf(0) != -1) {
         storage.put('autoOpen', true)
@@ -47,7 +47,7 @@ if (autoMute) {
         device.setMusicVolume(0)
         toast('成功设置媒体音量为0')
     } catch (err) {
-        alert('首先需要开启权限，请开启后再次运行助手')
+        alert('需要开启权限，请开启后再次运行助手')
         exit()
     }
 }
@@ -67,7 +67,7 @@ function quit() {
 function registerKey() {
     events.observeKey()
     events.onKeyDown('volume_down', function (event) {
-        console.log('京东任务脚本停止了')
+        console.log('京东任务助手停止了')
         console.log('请手动切换回主页面')
         quit()
     })
@@ -102,12 +102,33 @@ function openAndInto() {
     })
 }
 
+// 获取金币数量
+function getCoin() {
+    let anchor = className('android.view.View').filter(function (w) {
+        if ((w.desc() && w.desc().match(/分红：.*份/)) || (w.text() && w.text().match(/分红：.*份/))) {
+            return true
+        } else {
+            return false
+        }
+    }).findOne(5000)
+    if (!anchor) {
+        console.log('找不到分红控件')
+        return false
+    }
+    let coin = anchor.parent().child(2).text()
+    if (coin) {
+        return parseInt(coin)
+    } else {
+        return false
+    }
+}
+
 // 打开任务列表
 function openTaskList() {
     console.log('打开任务列表')
     let taskListButtons = text('消耗').findOne(20000)
     if (!taskListButtons) {
-        console.log('未能打开任务列表，请关闭京东APP重新运行')
+        console.log('未能打开任务列表，请关闭京东重新运行！')
         quit()
     }
     taskListButtons = taskListButtons.parent().parent().parent().parent().children()
@@ -132,7 +153,7 @@ function openTaskList() {
     }
     taskListButton.click()
     if (!findTextDescMatchesTimeout(/累计任务奖励/, 10000)) {
-        console.log('似乎没能打开任务列表，退出')
+        console.log('似乎没能打开任务列表，退出！')
         console.log('如果已经打开而未检测到，请使用国内应用商店最新版京东APP尝试')
         quit()
     }
@@ -227,7 +248,7 @@ function timeTask() {
         c++
     }
     if (c > 39) {
-        console.log('未检测到任务完成标识')
+        console.log('未检测到任务完成标识。')
         return false
     }
     return true
@@ -251,6 +272,7 @@ function joinTask() {
             sleep(500)
             click(btn.centerX(), btn.centerY())
             sleep(500)
+            console.show()
             check = textMatches(/.*确认授权即同意.*/).findOne(8000)
             sleep(2000)
         }
@@ -270,23 +292,16 @@ function joinTask() {
         sleep(500)
         click(check.centerX(), check.centerY())
         sleep(500)
-        try {
-            let j = textMatches(/^确认授权(并加入店铺会员)*$/).findOne(8000).bounds()
-            if (!j) {
-                console.log('无法找到入会按钮，失败')
-                return false
-            }
-            click(j.centerX(), j.centerY())
-            sleep(500)
-            console.show()
-            return true
-        } catch (err) {
-            console.log('入会任务出现异常！停止完成入会任务。', err)
-            autoJoin = 0
-            sleep(500)
-            console.show()
+        console.show()
+
+        let j = textMatches(/^确认授权(并加入店铺会员)*$/).findOne(5000)
+        if (!j) {
+            console.log('无法找到入会按钮，失败')
             return false
         }
+        click(j.bounds().centerX(), j.bounds().centerY())
+        sleep(500)
+        return true
     }
 }
 
@@ -294,7 +309,7 @@ function joinTask() {
 function itemTask(cart) {
     console.log('等待进入商品列表...')
     if (!textContains('当前页').findOne(10000)) {
-        console.log('未能进入商品列表')
+        console.log('未能进入商品列表。')
         return false
     }
     sleep(2000)
@@ -329,7 +344,7 @@ function shopTask() {
     console.log('等待进入店铺列表...')
     let banner = textContains('喜欢').findOne(10000)
     if (!banner) {
-        console.log('未能进入店铺列表，返回')
+        console.log('未能进入店铺列表。返回。')
         return false
     }
     let c = banner.text().match(/(\d)\/(\d*)/)
@@ -342,7 +357,7 @@ function shopTask() {
     console.log('进行', c, '次')
     let like = textContains('喜欢').boundsInside(1, 0, device.width, device.height).findOnce()
     if (!like) {
-        console.log('未能找到喜欢按钮，返回')
+        console.log('未能找到喜欢按钮。返回。')
         return false
     }
     let bound = [like.bounds().centerX(), like.bounds().centerY()]
@@ -483,7 +498,7 @@ try {
         openAndInto()
         console.log('等待活动页面加载')
         if (!findTextDescMatchesTimeout(/.*去使用奖励.*/, 8000)) {
-            console.log('未能进入活动，请重新运行')
+            console.log('未能进入活动，请重新运行！')
             quit()
         }
         console.log('成功进入活动')
@@ -495,11 +510,21 @@ try {
         alert('请关闭弹窗后立刻手动打开京东APP进入活动页面，并打开任务列表', '限时30秒')
         console.log('请手动打开京东APP进入活动页面，并打开任务列表')
         if (!findTextDescMatchesTimeout(/累计任务奖励/, 30000)) {
-            console.log('未能进入活动，请重新运行')
+            console.log('未能进入活动，请重新运行！')
             quit()
         }
         console.log('成功进入活动')
         sleep(2000)
+    }
+
+
+    let startCoin = null
+    try {
+        console.log('获取初始金币数量')
+        startCoin = getCoin()
+        console.log('当前共有' + startCoin + '金币')
+    } catch (err) {
+        console.log('获取金币失败，跳过', err)
     }
 
     // 完成所有任务的循环
@@ -508,8 +533,8 @@ try {
 
         if (!taskButton) {
             console.log('领取累计奖励')
-            textContains('去领取').find().forEach(function(e, i) {
-                console.log('领取第'+(i+1)+'个累计奖励')
+            textContains('去领取').find().forEach(function (e, i) {
+                console.log('领取第' + (i + 1) + '个累计奖励')
                 e.click()
                 sleep(2000)
             })
@@ -517,10 +542,25 @@ try {
             console.log('最后进行签到任务')
             signTask()
 
-            console.log('没有可自动完成的任务了，退出')
-            console.log('互动任务、下单任务需要手动完成')
+            let endCoin = null
+            try {
+                console.log('获取结束金币数量')
+                endCoin = getCoin()
+                console.log('当前共有' + endCoin + '金币')
+            } catch (err) {
+                console.log('获取金币失败，跳过', err)
+            }
+
+            console.log('没有可自动完成的任务了，退出。')
+            console.log('互动任务、下单任务需要手动完成。')
+            if (startCoin && endCoin) {
+                console.log('本次运行获得' + (endCoin - startCoin) + '金币')
+            } else {
+                console.log('本次运行获得金币无法计算，具体原因请翻阅日志。')
+            }
+
             // alert('任务已完成', '别忘了在脚本主页领取年货节红包！')
-            alert('任务已完成', '互动任务手动完成之后还会有新任务，建议做完互动再次运行助手')
+            alert('任务已完成', '互动任务手动完成之后还会有新任务，建议做完互动二次运行脚本')
             quit()
         }
 
