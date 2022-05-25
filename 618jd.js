@@ -1,5 +1,5 @@
 if (!auto.service) {
-    toast('无障碍服务未启动，即将退出！')
+    toast('无障碍服务未启动，退出！')
     exit()
 }
 
@@ -11,7 +11,7 @@ function getSetting() {
     autoMute && indices.push(1)
     autoJoin && indices.push(2)
 
-    let settings = dialogs.multiChoice('任务设置', ['自动打开京东进入活动，多开或任务列表无法自动打开时取消勾选', '自动调整媒体音量为0，以免直播任务发出声音，首次选择需要修改系统设置权限', '自动完成入会任务，京东将授权手机号给商家，日后可能会收到推广短信'], indices)
+    let settings = dialogs.multiChoice('任务设置', ['自动打开京东进入活动，多开或任务列表无法自动打开时取消勾选', '自动调整媒体音量为0，以免直播任务发出声音，首次选择需要修改系统设置权限', '自动完成入会任务，京东将授权手机号给商家，可能会收到推广短信'], indices)
 
     if (settings.indexOf(0) != -1) {
         storage.put('autoOpen', true)
@@ -53,7 +53,7 @@ if (autoMute) {
 }
 
 console.log('开始完成京东任务...')
-console.log('按音量减键停止')
+console.log('按音量下键停止')
 
 device.keepScreenDim(30 * 60 * 1000) // 防止息屏30分钟
 
@@ -67,7 +67,7 @@ function quit() {
 function registerKey() {
     events.observeKey()
     events.onKeyDown('volume_down', function (event) {
-        console.log('京东任务助手停止了')
+        console.log('京东任务脚本停止了')
         console.log('请手动切换回主页面')
         quit()
     })
@@ -98,7 +98,7 @@ function openAndInto() {
 
     app.startActivity({
         action: "VIEW",
-        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JKrBdrm","M_sourceFrom":"mxz","msf_type":"auto"}'
+        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JdvhSIt","M_sourceFrom":"mxz","msf_type":"auto"}'
     })
 }
 
@@ -132,15 +132,8 @@ function openTaskList() {
     }
     taskListButton.click()
     if (!findTextDescMatchesTimeout(/累计任务奖励/, 10000)) {
-        console.log('似乎没能打开任务列表，使用备用方法尝试')
-        let taskButtons = textMatches(/.*浏览并关注.*|.*浏览.*s.*|.*累计浏览.*|.*浏览可得.*|.*逛晚会.*|.*品牌墙.*|.*打卡.*/).findOne(8000)
-        if (!taskButtons) {
-            console.log(currentActivity())
-            console.log('实在是无法检测到任务列表，即将退出！')
-        } else {
-            console.log('找到任务列表，继续')
-            return
-        }
+        console.log('似乎没能打开任务列表，退出')
+        console.log('如果已经打开而未检测到，请使用国内应用商店最新版京东APP尝试')
         quit()
     }
 }
@@ -148,7 +141,7 @@ function openTaskList() {
 // 关闭任务列表
 function closeTaskList() {
     console.log('关闭任务列表')
-    let jiangli = findTextDescMatchesTimeout(/累计任务奖励/).findOne(5000)
+    let jiangli = findTextDescMatchesTimeout(/累计任务奖励/, 5000)
     if (!jiangli) {
         console.log('无法找到任务奖励标识')
         return false
@@ -179,9 +172,9 @@ function getTaskByText() {
             tTitle = item.parent().child(1).text()
             let r = tTitle.match(/(\d)\/(\d*)/)
             if (!r) continue
-    
+
             tCount = (r[2] - r[1])
-    
+
             console.log(tTitle, tCount)
             if (tCount) { // 如果数字相减不为0，证明没完成
                 tText = item.text()
@@ -288,7 +281,7 @@ function joinTask() {
             console.show()
             return true
         } catch (err) {
-            console.log('入会任务出现异常，停止完成入会任务', err)
+            console.log('入会任务出现异常！停止完成入会任务。', err)
             autoJoin = 0
             sleep(500)
             console.show()
@@ -439,13 +432,58 @@ function doTask(tButton, tText, tTitle) {
     return tFlag
 }
 
+function signTask() {
+    let anchor = className('android.view.View').filter(function (w) {
+        return w.clickable() && (w.text() == '去使用奖励' || w.desc() == '去使用奖励')
+    }).findOne(5000)
+
+    if (!anchor) {
+        console.log('未找到使用奖励按钮，签到失败')
+        return false
+    }
+
+    let anchor_index = anchor.indexInParent()
+    let sign = anchor.parent().child(anchor_index + 2) // 去使用的后两个
+    sign.click()
+
+    sign = textMatches(/.*点我签到.*|.*明天再来.*/).findOne(5000)
+    if (!sign) {
+        console.log('未找到签到按钮')
+        return false
+    }
+
+    if (sign.text().match(/明天再来/)) {
+        console.log('已经签到')
+    } else {
+        click(sign.bounds().centerX(), sign.bounds().centerY())
+        console.log('签到完成，关闭签到弹窗')
+
+        if (!next) {
+            console.log('找不到下一个红包提示语，未能自动关闭弹窗')
+            return false
+        }
+        console.log('关闭签到弹窗')
+        next.parent().child(0).click()
+    }
+
+    let title = text('每天签到领大额红包').findOne(5000)
+    if (!title) {
+        console.log('未找到标题，未能自动关闭签到页。')
+        return false
+    }
+    console.log('关闭签到页')
+    title.parent().child(0).click()
+
+    return true
+}
+
 // 全局try catch，应对无法显示报错
 try {
     if (autoOpen) {
         openAndInto()
         console.log('等待活动页面加载')
         if (!findTextDescMatchesTimeout(/.*去使用奖励.*/, 8000)) {
-            console.log('未能进入活动，请重新运行！')
+            console.log('未能进入活动，请重新运行')
             quit()
         }
         console.log('成功进入活动')
@@ -457,7 +495,7 @@ try {
         alert('请关闭弹窗后立刻手动打开京东APP进入活动页面，并打开任务列表', '限时30秒')
         console.log('请手动打开京东APP进入活动页面，并打开任务列表')
         if (!findTextDescMatchesTimeout(/累计任务奖励/, 30000)) {
-            console.log('未能进入活动，请重新运行！')
+            console.log('未能进入活动，请重新运行')
             quit()
         }
         console.log('成功进入活动')
@@ -469,8 +507,17 @@ try {
         let [taskButton, taskText, taskCount, taskTitle] = getTaskByText()
 
         if (!taskButton) {
-            console.log('未找到可自动完成的任务，退出')
-            console.log('如果页面中任务列表未铺满屏幕，请重新运行一次助手尝试')
+            console.log('领取累计奖励')
+            textContains('去领取').find().forEach(function(e, i) {
+                console.log('领取第'+(i+1)+'个累计奖励')
+                e.click()
+                sleep(2000)
+            })
+
+            console.log('最后进行签到任务')
+            signTask()
+
+            console.log('没有可自动完成的任务了，退出')
             console.log('互动任务、下单任务需要手动完成')
             // alert('任务已完成', '别忘了在脚本主页领取年货节红包！')
             alert('任务已完成', '互动任务手动完成之后还会有新任务，建议做完互动再次运行助手')
