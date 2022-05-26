@@ -1,5 +1,5 @@
 if (!auto.service) {
-    toast('无障碍服务未启动，退出！')
+    toast('无障碍服务未启动！退出！')
     exit()
 }
 
@@ -11,7 +11,7 @@ function getSetting() {
     autoMute && indices.push(1)
     autoJoin && indices.push(2)
 
-    let settings = dialogs.multiChoice('任务设置', ['自动打开京东进入活动，多开或任务列表无法自动打开时取消勾选', '自动调整媒体音量为0，以免直播任务发出声音，首次选择需要修改系统设置权限', '自动完成入会任务，京东将授权手机号给商家，可能会收到商家推广短信'], indices)
+    let settings = dialogs.multiChoice('任务设置', ['自动打开京东进入活动。多开或任务列表无法自动打开时取消勾选', '自动调整媒体音量为0。以免直播任务发出声音，首次选择需要修改系统设置权限', '自动完成入会任务。京东将授权手机号给商家，可能会收到推广短信'], indices)
 
     if (settings.indexOf(0) != -1) {
         storage.put('autoOpen', true)
@@ -47,7 +47,7 @@ if (autoMute) {
         device.setMusicVolume(0)
         toast('成功设置媒体音量为0')
     } catch (err) {
-        alert('需要开启权限，请开启后再次运行助手')
+        alert('首先需要开启权限，请开启后再次运行脚本')
         exit()
     }
 }
@@ -67,8 +67,9 @@ function quit() {
 function registerKey() {
     events.observeKey()
     events.onKeyDown('volume_down', function (event) {
-        console.log('京东任务助手停止了')
+        console.log('京东任务脚本停止了')
         console.log('请手动切换回主页面')
+        startCoin && console.log('本次任务开始时有' + startCoin + '金币')
         quit()
     })
 }
@@ -88,9 +89,9 @@ function findTextDescMatchesTimeout(reg, timeout) {
 
 // 打开京东进入活动
 function openAndInto() {
-    console.log('正在打开京东APP...')
+    console.log('正在打开京东App...')
     if (!launch('com.jingdong.app.mall')) {
-        console.log('可能未安装京东APP')
+        console.log('可能未安装京东App')
     }
 
     sleep(2000)
@@ -119,19 +120,24 @@ function getCoin() {
     if (coin) {
         return parseInt(coin)
     } else {
-        return false
+        coin = anchor.parent().child(3).text() // 有可能中间插了个控件
+        if (coin) {
+            return parseInt(coin)
+        } else {
+            return false
+        }
     }
 }
 
 // 打开任务列表
 function openTaskList() {
     console.log('打开任务列表')
-    let taskListButtons = text('消耗').findOne(20000)
+    let taskListButtons = findTextDescMatchesTimeout(/分红：.*份/, 20000)
     if (!taskListButtons) {
         console.log('未能打开任务列表，请关闭京东重新运行！')
         quit()
     }
-    taskListButtons = taskListButtons.parent().parent().parent().parent().children()
+    taskListButtons = taskListButtons.parent().children()
 
     let taskListButton = null
     let flag = 0
@@ -152,9 +158,10 @@ function openTaskList() {
         quit()
     }
     taskListButton.click()
+    console.log('等待任务列表')
     if (!findTextDescMatchesTimeout(/累计任务奖励/, 10000)) {
         console.log('似乎没能打开任务列表，退出！')
-        console.log('如果已经打开而未检测到，请使用国内应用商店最新版京东APP尝试')
+        console.log('如果已经打开而未检测到，请使用国内应用商店版最新京东APP尝试')
         quit()
     }
 }
@@ -216,6 +223,7 @@ function backToList() {
     for (let i = 0; i < 3; i++) { // 尝试返回3次
         if (!findTextDescMatchesTimeout(/累计任务奖励/, 5000)) {
             console.log('返回失败，重试返回')
+            sleep(2000)
             back()
             continue
         } else {
@@ -268,6 +276,7 @@ function joinTask() {
         if (check.text().match(/.*立即开卡.*|.*解锁全部会员福利.*/)) {
             let btn = check.bounds()
             console.log('即将点击开卡/解锁福利，自动隐藏控制台')
+            sleep(500)
             console.hide()
             sleep(500)
             click(btn.centerX(), btn.centerY())
@@ -281,19 +290,47 @@ function joinTask() {
             console.log('无法找到入会按钮弹窗，加载失败')
             return false
         }
+
         if (check.indexInParent() == 6) {
-            check = check.parent().child(5).bounds()
+            check = check.parent().child(5)
         } else {
-            check = check.parent().parent().child(5).bounds()
+            check = check.parent().parent().child(5)
         }
 
-        console.log('即将勾选授权，自动隐藏控制台', check)
+        check = check.bounds()
+
+        let x = check.centerX()
+        let y = check.centerY()
+
+        console.log('检测是否有遮挡')
+        let float = className('android.widget.ImageView')
+            .filter(function (w) {
+                let b = w.bounds()
+                return b.left <= x && b.right >= x && b.top <= y && b.bottom >= y
+            }).find()
+
+        if (float.length > 1) {
+            console.log('有浮窗遮挡，尝试移除')
+            if (device.sdkInt >= 24) {
+                gesture(1000, [x, y], [x, y + 200])
+                console.log('已经进行移开操作，如果失败请反馈')
+            } else {
+                console.log('安卓版本低，无法自动移开浮窗，入会任务失败，至少需要安卓7.0。')
+                return false
+            }
+        } else {
+            console.log('未发现遮挡的浮窗，继续勾选')
+        }
+
+        console.log('即将勾选授权，自动隐藏控制台')
+        sleep(500)
         console.hide()
         sleep(500)
-        click(check.centerX(), check.centerY())
+        click(x, y)
         sleep(500)
         console.show()
 
+        console.log('准备点击入会按钮')
         let j = textMatches(/^确认授权(并加入店铺会员)*$/).findOne(5000)
         if (!j) {
             console.log('无法找到入会按钮，失败')
@@ -301,6 +338,7 @@ function joinTask() {
         }
         click(j.bounds().centerX(), j.bounds().centerY())
         sleep(500)
+        console.log('入会完成，返回')
         return true
     }
 }
@@ -344,7 +382,7 @@ function shopTask() {
     console.log('等待进入店铺列表...')
     let banner = textContains('喜欢').findOne(10000)
     if (!banner) {
-        console.log('未能进入店铺列表。返回。')
+        console.log('未能进入店铺列表，返回。')
         return false
     }
     let c = banner.text().match(/(\d)\/(\d*)/)
@@ -460,6 +498,7 @@ function signTask() {
     let anchor_index = anchor.indexInParent()
     let sign = anchor.parent().child(anchor_index + 2) // 去使用的后两个
     sign.click()
+    sleep(3000)
 
     sign = textMatches(/.*点我签到.*|.*明天再来.*/).findOne(5000)
     if (!sign) {
@@ -471,26 +510,50 @@ function signTask() {
         console.log('已经签到')
     } else {
         click(sign.bounds().centerX(), sign.bounds().centerY())
-        console.log('签到完成，关闭签到弹窗')
+        sleep(1000)
+        console.log('签到完成')
 
-        if (!next) {
-            console.log('找不到下一个红包提示语，未能自动关闭弹窗')
-            return false
+        // let next = textContains('下一个红包').findOne(5000)
+        // if (!next) {
+        //     console.log('找不到下一个红包提示语，未能自动关闭弹窗')
+        // } else {
+        //     console.log('关闭签到弹窗')
+        //     next.parent().child(0).click()
+        //     sleep(1000)
+        // }
+    }
+
+    // let title = text('每天签到领大额红包').findOne(5000)
+    // if (!title) {
+    //     console.log('未找到标题，未能自动关闭签到页。')
+    //     return false
+    // }
+    // console.log('关闭签到页')
+    // title.parent().child(0).click()
+    // sleep(1000)
+
+    console.log('检测是否有通知权限弹窗')
+    if (textContains('通知权限').findOne(3000)) {
+        console.log('出现弹窗，关闭')
+        text('取消').click()
+        sleep(1000)
+        console.log('二次检测')
+        if (textContains('通知权限').findOne(3000)) {
+            console.log('出现弹窗，关闭')
+            text('取消').click()
+            sleep(1000)
+            console.log('完成')
+        } else {
+            console.log('没有弹窗，继续。')
         }
-        console.log('关闭签到弹窗')
-        next.parent().child(0).click()
+    } else {
+        console.log('没有弹窗，继续。')
     }
-
-    let title = text('每天签到领大额红包').findOne(5000)
-    if (!title) {
-        console.log('未找到标题，未能自动关闭签到页。')
-        return false
-    }
-    console.log('关闭签到页')
-    title.parent().child(0).click()
 
     return true
 }
+
+let startCoin = null // 音量键需要
 
 // 全局try catch，应对无法显示报错
 try {
@@ -507,8 +570,8 @@ try {
         openTaskList();
         sleep(5000)
     } else {
-        alert('请关闭弹窗后立刻手动打开京东APP进入活动页面，并打开任务列表', '限时30秒')
-        console.log('请手动打开京东APP进入活动页面，并打开任务列表')
+        alert('请关闭弹窗后立刻手动打开京东App进入活动页面，并打开任务列表', '限时30秒')
+        console.log('请手动打开京东App进入活动页面，并打开任务列表')
         if (!findTextDescMatchesTimeout(/累计任务奖励/, 30000)) {
             console.log('未能进入活动，请重新运行！')
             quit()
@@ -518,7 +581,6 @@ try {
     }
 
 
-    let startCoin = null
     try {
         console.log('获取初始金币数量')
         startCoin = getCoin()
@@ -526,6 +588,8 @@ try {
     } catch (err) {
         console.log('获取金币失败，跳过', err)
     }
+
+    sleep(2000)
 
     // 完成所有任务的循环
     while (true) {
