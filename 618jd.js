@@ -11,7 +11,12 @@ function getSetting() {
     autoMute && indices.push(1)
     autoJoin && indices.push(2)
 
-    let settings = dialogs.multiChoice('任务设置', ['自动打开京东进入活动。多开或任务列表无法自动打开时取消勾选', '自动调整媒体音量为0。以免直播任务发出声音，首次选择需要修改系统设置权限', '自动完成入会任务。京东将授权手机号给商家，可能会收到推广短信'], indices)
+    let settings = dialogs.multiChoice('任务设置', ['自动打开京东进入活动。多开或任务列表无法自动打开时取消勾选', '自动调整媒体音量为0。以免直播任务发出声音，首次选择需要修改系统设置权限', '自动完成入会任务。京东将授权手机号给商家，日后可能会收到推广短信'], indices)
+
+    if (settings.length == 0) {
+        toast('取消选择，任务停止')
+        exit()
+    }
 
     if (settings.indexOf(0) != -1) {
         storage.put('autoOpen', true)
@@ -99,7 +104,7 @@ function openAndInto() {
 
     app.startActivity({
         action: "VIEW",
-        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JdvhSIt","M_sourceFrom":"mxz","msf_type":"auto"}'
+        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JwZlwGC","M_sourceFrom":"mxz","msf_type":"auto"}'
     })
 }
 
@@ -161,7 +166,7 @@ function openTaskList() {
     console.log('等待任务列表')
     if (!findTextDescMatchesTimeout(/累计任务奖励/, 10000)) {
         console.log('似乎没能打开任务列表，退出！')
-        console.log('如果已经打开而未检测到，请使用国内应用商店版最新京东APP尝试')
+        console.log('如果已经打开而未检测到，请使用国内应用市场版京东尝试。')
         quit()
     }
 }
@@ -293,6 +298,8 @@ function joinTask() {
 
         if (check.indexInParent() == 6) {
             check = check.parent().child(5)
+        } else if (check.text() == '确认授权即同意') {
+            check = check.parent().child(0)
         } else {
             check = check.parent().parent().child(5)
         }
@@ -315,7 +322,7 @@ function joinTask() {
                 gesture(1000, [x, y], [x, y + 200])
                 console.log('已经进行移开操作，如果失败请反馈')
             } else {
-                console.log('安卓版本低，无法自动移开浮窗，入会任务失败，至少需要安卓7.0。')
+                console.log('安卓版本低，无法自动移开浮窗，入会任务失败。至少需要安卓7.0。')
                 return false
             }
         } else {
@@ -337,7 +344,7 @@ function joinTask() {
             return false
         }
         click(j.bounds().centerX(), j.bounds().centerY())
-        sleep(500)
+        sleep(1000)
         console.log('入会完成，返回')
         return true
     }
@@ -382,7 +389,7 @@ function shopTask() {
     console.log('等待进入店铺列表...')
     let banner = textContains('喜欢').findOne(10000)
     if (!banner) {
-        console.log('未能进入店铺列表，返回。')
+        console.log('未能进入店铺列表。返回。')
         return false
     }
     let c = banner.text().match(/(\d)\/(\d*)/)
@@ -428,9 +435,9 @@ function viewTask() {
 function wallTask() {
     console.log('进行品牌墙任务')
     sleep(3000)
-    for (let i of [2, 4, 6]) { // 选三个
+    for (let i of [2, 4, 5, 7, 8]) { // 选5个
         console.log('打开一个')
-        textContains('!q70').findOnce(i).click()
+        textContains('!q70').boundsInside(0, 0, device.width, device.height).findOnce(i).click()
         sleep(5000)
         console.log('直接返回')
         back()
@@ -439,8 +446,8 @@ function wallTask() {
         sleep(3000)
     }
     console.log('返回顶部')
-    let root = textContains('!q70').findOnce(2).parent().parent().parent().parent().parent().parent()
-    root.child(root.childCount() - 1).click()
+    let root = textContains('到底了').findOnce().parent().parent()
+    root.child(root.childCount() - 2).click()
     console.log('品牌墙完成后重新打开任务列表')
     sleep(3000)
     openTaskList()
@@ -650,6 +657,7 @@ try {
 } catch (err) {
     device.cancelKeepingAwake()
     if (err.toString() != 'JavaException: com.stardust.autojs.runtime.exception.ScriptInterruptedException: null') {
+        startCoin && console.log('本次任务开始时有' + startCoin + '金币')
         console.error(new Error().stack, err)
     }
 }
