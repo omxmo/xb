@@ -104,7 +104,7 @@ function openAndInto() {
 
     app.startActivity({
         action: "VIEW",
-        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JwZlwGC","M_sourceFrom":"mxz","msf_type":"auto"}'
+        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JLEvUMA","M_sourceFrom":"mxz","msf_type":"auto"}'
     })
 }
 
@@ -166,7 +166,7 @@ function openTaskList() {
     console.log('等待任务列表')
     if (!findTextDescMatchesTimeout(/累计任务奖励/, 10000)) {
         console.log('似乎没能打开任务列表，退出！')
-        console.log('如果已经打开而未检测到，请使用国内应用市场版京东尝试。')
+        console.log('如果已经打开而未检测到，请删除101版本及以上的webview或使用国内应用市场版京东尝试。')
         quit()
     }
 }
@@ -251,8 +251,8 @@ function timeTask() {
         }
 
         // 弹窗处理
-        let pop = text('升级开卡会员领好礼').exists()
-        if (pop) {
+        let pop = text('升级开卡会员领好礼')
+        if (pop.exists()) {
             pop.parent().parent().child(2).click()
             console.log('关闭会员弹窗')
         }
@@ -575,7 +575,6 @@ try {
         sleep(2000)
 
         openTaskList();
-        sleep(5000)
     } else {
         alert('请关闭弹窗后立刻手动打开京东App进入活动页面，并打开任务列表', '限时30秒')
         console.log('请手动打开京东App进入活动页面，并打开任务列表')
@@ -584,9 +583,9 @@ try {
             quit()
         }
         console.log('成功进入活动')
-        sleep(2000)
     }
 
+    sleep(5000)
 
     try {
         console.log('获取初始金币数量')
