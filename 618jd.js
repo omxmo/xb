@@ -104,7 +104,7 @@ function openAndInto() {
 
     app.startActivity({
         action: "VIEW",
-        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JLEvUMA","M_sourceFrom":"mxz","msf_type":"auto"}'
+        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JCRnID6","M_sourceFrom":"mxz","msf_type":"auto"}'
     })
 }
 
@@ -245,7 +245,7 @@ function timeTask() {
     while (c < 40) { // 0.5 * 40 = 20 秒，防止死循环
         if ((textMatches(/获得.*?金币/).exists() || descMatches(/获得.*?金币/).exists())) // 等待已完成出现
             break
-        if ((textMatches(/已达上限/).exists() || descMatches(/已达上限/).exists())) { // 失败
+        if ((textMatches(/已浏览/).exists() || descMatches(/已浏览/).exists())) { // 失败
             console.log('上限，返回刷新任务列表')
             return false
         }
@@ -435,7 +435,7 @@ function viewTask() {
 function wallTask() {
     console.log('进行品牌墙任务')
     sleep(3000)
-    for (let i of [2, 4, 5, 7, 8]) { // 选5个
+    for (let i of [2, 3, 4, 5, 6]) { // 选5个
         console.log('打开一个')
         textContains('!q70').boundsInside(0, 0, device.width, device.height).findOnce(i).click()
         sleep(5000)
@@ -656,7 +656,7 @@ try {
 } catch (err) {
     device.cancelKeepingAwake()
     if (err.toString() != 'JavaException: com.stardust.autojs.runtime.exception.ScriptInterruptedException: null') {
-        startCoin && console.log('本次任务开始时有' + startCoin + '金币')
         console.error(new Error().stack, err)
+        startCoin && console.log('本次任务开始时有' + startCoin + '金币')
     }
 }
