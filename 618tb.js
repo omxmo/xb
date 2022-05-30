@@ -174,7 +174,7 @@ try {
 
     // 打开淘宝活动页面
     console.log('正在打开淘宝...')
-    var url = 'pages.tmall.com/wow/z/hdwk/20220618/gamehome?disableNav=YES'
+    var url = 'pages.tmall.com/wow/z/hdwk/20220618/gamehome?disableNav=YES&ali_trackid=2:mm_1391100045_2014900139_110817650007'
 
     app.startActivity({
         action: "VIEW",
