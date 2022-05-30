@@ -3,9 +3,40 @@ if (!auto.service) {
     exit()
 }
 
-// alert('请把手机放稳，不要摇晃！', '不然有时候会跳出合伙赢喵币，导致任务阻塞')
+function getSetting() {
+    let indices = []
+    autoOpen && indices.push(0)
+    autoMute && indices.push(1)
 
-if (confirm('是否需要自动调整媒体音量为0', '以免直播任务发出声音。需要修改系统设置权限。')) {
+    let settings = dialogs.multiChoice('任务设置', ['自动打开淘宝进入活动。多开或任务列表无法自动打开时取消勾选（注意，分身运行淘宝大概率导致任务收益变为100）', '自动调整媒体音量为0。以免直播任务发出声音，首次选择需要修改系统设置权限'], indices)
+
+    if (settings.length == 0) {
+        toast('取消选择，任务停止')
+        exit()
+    }
+
+    if (settings.indexOf(0) != -1) {
+        storage.put('autoOpen', true)
+        autoOpen = true
+    } else {
+        storage.put('autoOpen', false)
+        autoOpen = false
+    }
+    if (settings.indexOf(1) != -1) {
+        storage.put('autoMute', true)
+        autoMute = true
+    } else {
+        storage.put('autoMute', false)
+        autoMute = false
+    }
+}
+
+let storage = storages.create("tb_task");
+let autoOpen = storage.get('autoOpen', true)
+let autoMute = storage.get('autoMute', true)
+getSetting()
+
+if (autoMute) {
     try {
         device.setMusicVolume(0)
         toast('成功设置媒体音量为0')
@@ -13,8 +44,6 @@ if (confirm('是否需要自动调整媒体音量为0', '以免直播任务发�
         alert('首先需要开启权限，请开启后再次运行脚本')
         exit()
     }
-} else {
-    toast('不修改媒体音量')
 }
 
 console.show()
@@ -26,7 +55,7 @@ device.keepScreenDim(60 * 60 * 1000)
 function registerKey() {
     events.observeKey()
     events.onKeyDown('volume_down', function (event) {
-        console.log('喵糖任务脚本停止了')
+        console.log('喵币任务脚本停止了')
         console.log('请手动切换回主页面')
         device.cancelKeepingAwake()
         exit()
@@ -69,7 +98,7 @@ try {
 
     // 查找任务按钮
     function findTask() {
-        var jumpButtonFind = textMatches(/去浏览|去搜索|去完成|签到|逛一逛|去逛逛|去观看|去参赛/) // 找进入任务的按钮，10秒
+        var jumpButtonFind = textMatches(/去浏览|去搜索|去完成|去签到|逛一逛|去逛逛|去观看|去参赛/) // 找进入任务的按钮，10秒
         var jumpButtons = findTimeout(jumpButtonFind, 10000)
 
         if (!jumpButtons) {
@@ -86,7 +115,7 @@ try {
                 continue
             }
             if (taskName) {
-                if (taskName.match(/签到/)) {
+                if (taskName.match(/签到领/)) {
                     console.log('进行签到任务')
                     sleep(1000)
                     jumpButtons[i].click()
@@ -110,7 +139,7 @@ try {
         //     }
         // }
 
-        textMatches(/.*浏览得奖励.*/).findOne(15000) // 等待开始
+        // textMatches(/.*浏览得奖励.*/).findOne(15000) // 等待开始
 
         let finish_c = 0
         while (finish_c < 50) { // 0.5 * 50 = 25 秒，防止死循环
@@ -186,7 +215,7 @@ try {
 
     try {
         textMatches(/领喵币/).findOne(20000)
-        console.log('准备打开任务列表')
+        console.log('准备打开任务列表，出现弹窗请手动关闭')
         sleep(2000)
         // if(click('关闭')) {
         //     sleep(2000)
@@ -214,7 +243,7 @@ try {
         sleep(2000)
     } catch (err) {
         console.log(err)
-        console.log('无法进入任务列表，如果你认为这是Bug，请截图反馈')
+        console.log('无法进入任务列表，如果你认为这是bug，请截图反馈')
         quit()
     }
 
