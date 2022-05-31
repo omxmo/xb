@@ -104,7 +104,7 @@ function openAndInto() {
 
     app.startActivity({
         action: "VIEW",
-        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JCRnID6","M_sourceFrom":"mxz","msf_type":"auto"}'
+        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JLokFFb","M_sourceFrom":"mxz","msf_type":"auto"}'
     })
 }
 
@@ -137,12 +137,16 @@ function getCoin() {
 // 打开任务列表
 function openTaskList() {
     console.log('打开任务列表')
-    let taskListButtons = findTextDescMatchesTimeout(/分红：.*份/, 20000)
+    let taskListButtons = findTextDescMatchesTimeout(/分红\+卡牌/, 20000)
     if (!taskListButtons) {
         console.log('未能打开任务列表，请关闭京东重新运行！')
         quit()
     }
-    taskListButtons = taskListButtons.parent().children()
+    if (taskListButtons.indexInParent() == 0) {
+        taskListButtons = taskListButtons.parent().parent().children()
+    } else {
+        taskListButtons = taskListButtons.parent().children()
+    }
 
     let taskListButton = null
     let flag = 0

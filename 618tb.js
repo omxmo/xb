@@ -3,6 +3,8 @@ if (!auto.service) {
     exit()
 }
 
+// alert('请把手机放稳，不要摇晃！', '不然有时候会跳出合伙赢喵币，导致任务阻塞')
+
 function getSetting() {
     let indices = []
     autoOpen && indices.push(0)
@@ -140,20 +142,11 @@ try {
         // }
 
         // textMatches(/.*浏览得奖励.*/).findOne(15000) // 等待开始
-
+        sleep(5000)
         let finish_c = 0
         while (finish_c < 50) { // 0.5 * 50 = 25 秒，防止死循环
             let finish_reg = /.*完成.*|.*失败.*|.*上限.*|.*开小差.*|.*发放.*/
-            if (
-                (textMatches(finish_reg).exists() ||
-                    descMatches(finish_reg).exists() ||
-                    textContains('任务已完成').exists() ||
-                    textContains('喵币已发放').exists() ||
-                    descContains('任务已完成').exists() ||
-                    descContains('喵币已发放').exists()) &&
-                !text("浏览得奖励").exists()
-            ) // 等待已完成出现，有可能失败
-            {
+            if (textMatches(finish_reg).exists() || descMatches(finish_reg).exists()) { // 等待已完成出现，有可能失败
                 break
             }
             if (textMatches(/.*休息会呗.*/).exists()) {
@@ -177,27 +170,28 @@ try {
             // console.log('请手动切换回主页面')
             // device.cancelKeepingAwake()
             // quit()
-            return back()
+            back()
+            sleep(1000)
+            // TODO: 返回检测
+            if (!textContains('当前进度').findOne(5000)) {
+                console.log('似乎没有返回，二次尝试')
+                back()
+            }
+            return
         }
 
         console.log('任务完成，返回')
 
-        // if (currentActivity() == 'com.taobao.tao.TBMainActivity') {
-        //     var backButton = descContains('返回618列车').findOnce() // 有可能是浏览首页，有可能无法点击
-        //     if (backButton) {
-        //         if (!backButton.parent().parent().parent().click()) {
-        //             back()
-        //         }
-        //     } else {
-        //         back()
-        //     }
-        // } else {
-        //     back()
-        // }
         back()
-        if (!text('做任务赢奖励').findOne(5000)) {
-            console.log('似乎没有返回，二次尝试')
-            back()
+        sleep(1000)
+        if (!textContains('当前进度').findOne(5000)) {
+            if (currentActivity() == 'com.taobao.tao.TBMainActivity') {
+                console.log('返回到了主页，尝试重新进入任务')
+                id('com.taobao.taobao:id/rv_main_container').findOnce().child(3).child(0).click()
+            } else {
+                console.log('似乎没有返回，二次尝试')
+                back()
+            }
         }
     }
 
@@ -215,27 +209,33 @@ try {
 
     try {
         textMatches(/领喵币/).findOne(20000)
-        console.log('准备打开任务列表，出现弹窗请手动关闭')
+        console.log('准备打开任务列表')
         sleep(2000)
-        // if(click('关闭')) {
-        //     sleep(2000)
-        // }
         let c = findTextDescMatchesTimeout(/领喵币/, 1000)
         if (c) {
-            console.log('打开任务列表')
+            console.log('使用默认方法尝试打开任务列表')
             c.click()
         } else {
             throw '无法找到任务列表入口'
         }
-        if (!text('做任务赢奖励').findOne(8000)) {
+        if (!textContains('当前进度').findOne(8000)) {
             console.log('默认方式打开失败，二次尝试')
+            console.log('首先检测弹窗')
+            for (let i = 0; i < 2 && text('关闭').findOne(2000); i++) { // 关闭弹窗
+                console.log('检测到弹窗，关闭')
+                click('关闭')
+                sleep(2000)
+            }
+            console.log('出现未能自动关闭的弹窗请手动关闭')
+            sleep(2000)
             // let right = c.bounds().right
             // let left = c.bounds().left
             // let top = c.bounds().top
             // let bottom = c.bounds().bottom
             // click(random(right,left), random(top, bottom))
             click(c.bounds().centerX(), c.bounds().centerY())
-            if (!text('做任务赢奖励').findOne(8000)) {
+            console.log('已点击，等待任务列表出现')
+            if (!textContains('当前进度').findOne(8000)) {
                 throw '无法打开任务列表'
             }
         }
