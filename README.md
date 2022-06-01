@@ -1,4 +1,4 @@
-- 你的 `Star` 是长期更新的动力！   
+- 你的 `Star` 是长期更新的动力！！   
 
 淘宝/京东618任务自动助手：在AuotoJS上运行618tb.js和618jd.js，或者直接下载打包好的APK：https://wwc.lanzouq.com/b01cfbrbi  
 基于AutoJS开发，AutoJS下载：https://github.com/hyb1996/Auto.js
