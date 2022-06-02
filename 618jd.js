@@ -70,7 +70,13 @@ function quit() {
 
 // 监听音量下键
 function registerKey() {
-    events.observeKey()
+    try {
+        events.observeKey()
+    } catch(err) {
+        console.log('监听音量键停止失败，应该是无障碍权限出错，请关闭软件后台任务重新运行。')
+        console.log('如果还是不行可以重启手机尝试。')
+        quit()
+    }
     events.onKeyDown('volume_down', function (event) {
         console.log('京东任务脚本停止了')
         console.log('请手动切换回主页面')
@@ -104,7 +110,7 @@ function openAndInto() {
 
     app.startActivity({
         action: "VIEW",
-        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JLokFFb","M_sourceFrom":"mxz","msf_type":"auto"}'
+        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/lt6g6Cu","M_sourceFrom":"mxz","msf_type":"auto"}'
     })
 }
 
@@ -257,7 +263,7 @@ function timeTask() {
         // 弹窗处理
         let pop = text('升级开卡会员领好礼')
         if (pop.exists()) {
-            pop.parent().parent().child(2).click()
+            pop.findOnce().parent().parent().child(2).click()
             console.log('关闭会员弹窗')
         }
 
@@ -291,8 +297,8 @@ function joinTask() {
             click(btn.centerX(), btn.centerY())
             sleep(500)
             console.show()
-            check = textMatches(/.*确认授权即同意.*/).findOne(8000)
             sleep(2000)
+            check = textMatches(/.*确认授权即同意.*/).boundsInside(0,0,device.width,device.height).findOne(8000)
         }
 
         if (!check) {

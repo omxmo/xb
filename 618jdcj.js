@@ -55,7 +55,13 @@ function quit() {
 
 // 监听音量下键
 function registerKey() {
-    events.observeKey()
+    try {
+        events.observeKey()
+    } catch(err) {
+        console.log('监听音量键（用于停止脚本）失败，应该是无障碍权限出错，请关闭软件后台任务重新运行。')
+        console.log('如果还是不行可以重启手机尝试。')
+        quit()
+    }
     events.onKeyDown('volume_down', function (event) {
         console.log('京东任务脚本停止了')
         console.log('请手动切换回主页面')
@@ -88,7 +94,7 @@ function openAndInto() {
 
     app.startActivity({
         action: "VIEW",
-        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/JtoeLTY","M_sourceFrom":"mxz","msf_type":"auto"}'
+        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/lL6anOI","M_sourceFrom":"mxz","msf_type":"auto"}'
     })
 }
 
@@ -333,7 +339,7 @@ function openBox() {
         console.log('未能找到抽奖提示')
         return false
     }
-    let count = anchor.parent().child(1)
+    let count = anchor.parent().child(1).text()
     if (!parseInt(count)) {
         console.log('没有抽奖次数，返回')
         return true

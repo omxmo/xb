@@ -55,7 +55,13 @@ console.log('按音量下键停止')
 device.keepScreenDim(60 * 60 * 1000)
 
 function registerKey() {
-    events.observeKey()
+    try {
+        events.observeKey()
+    } catch(err) {
+        console.log('监听音量键停止失败，应该是无障碍权限出错，请关闭软件后台任务重新运行。')
+        console.log('如果还是不行可以重启手机尝试。')
+        quit()
+    }
     events.onKeyDown('volume_down', function (event) {
         console.log('喵币任务脚本停止了')
         console.log('请手动切换回主页面')
@@ -145,7 +151,7 @@ try {
         sleep(5000)
         let finish_c = 0
         while (finish_c < 50) { // 0.5 * 50 = 25 秒，防止死循环
-            let finish_reg = /.*完成.*|.*失败.*|.*上限.*|.*开小差.*|.*发放.*/
+            let finish_reg = /.*任务已完成[\s\S]*|.*失败.*|.*上限.*|.*开小差.*|.*喵币已发放.*/
             if (textMatches(finish_reg).exists() || descMatches(finish_reg).exists()) { // 等待已完成出现，有可能失败
                 break
             }
