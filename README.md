@@ -1,4 +1,10 @@
-- 你的 `Star` 是长期更新的动力!！！   
+- 你的 `Star` 是长期更新的动力！  
+
+### 实时线报
+|更新时间|活动线报|参与方式|
+| :------------: | :------------: | :------------: |
+|6月8日|`最高19618元` 京东超级红包|[点击链接](https://u.jd.com/JwjrLXc)|
+|6月8日|`最高22888元` 天猫超级红包|[点击链接](https://m.tb.cn/h.ftZMHwC)|  
 
 淘宝/京东618任务自动助手：在AuotoJS上运行618tb.js和618jd.js，或者直接下载打包好的APK：https://wwc.lanzouq.com/b01cfbrbi  
 基于AutoJS开发，AutoJS下载：https://github.com/hyb1996/Auto.js
