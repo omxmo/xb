@@ -12,9 +12,7 @@
 ![](https://github.com/omxmo/xb/blob/main/wx.png)
 
 ### 线报聚合APP  
-活动太多，为了方便大家随时随地获取最新新报，做成了一个聚合APP。  
-扫码下载APP  
-![](https://github.com/omxmo/xb/blob/main/app.png)  
+活动太多，为了方便大家随时随地获取最新新报，做成了一个聚合APP，点击下载：[点击链接](https://a.app.qq.com/o/simple.jsp?pkgname=com.miaohui.xin)
 |主流电商|外卖点餐|出行|充值|
 | :------------: | :------------: | :------------: | :------------: |
 |淘宝 `领券返现`|饿了么 `66元红包`|高德打车 `100元打车券`|话费 `93元充100元`|
