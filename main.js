@@ -17,10 +17,8 @@ ui.layout(
 					
 				    <button id="tmhb" text="每天最高领取天猫22888元红包" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
 					<button id="jdhb" text="每天最高领取京东19618元红包" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
-					<button id="pddhb" text="拼多多iPhone直降千元，茅台直降600元" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
-					<button id="youhuiquan" text="话费充值91折，618购物省钱返现，合伙人月入过万！" margin="10 3" textColor="#111111"/>
-					<button id="elmhb" text="每天最高领饿了么66元红包" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
-					<button id="mtwmhb" text="每天最高领美团外卖66元红包" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
+					<button id="pddhb" text="拼多多30亿红包雨" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
+					<button id="youhuiquan" text="话费充值91折！一对一指导，合伙人月入过万！" margin="10 3" textColor="#111111"/>
 					
 					
 					<frame w="*" margin="10" h="1" bg="#ff8080" />
@@ -67,7 +65,7 @@ ui.layout(
                 </frame>
                 <frame>
 				    <vertical>
-                     <text margin="10 5" w="*" gravity="center" textSize="18sp">喵惠助手V1.3.8</text>
+                     <text margin="10 5" w="*" gravity="center" textSize="18sp">喵惠助手V1.3.9</text>
 					 <text margin="10 5">喵惠助手是一款基于安卓系统的辅助脚本工具，模拟人工在手机屏幕上点击，实现自动化操作，方便、快捷、安全，没有任何病毒。</text>
 					 <text margin="10 5">部分功能是整合互联网已有开源包和工具。长期优化更新，更多功能陆续增加中……获取源码请联系我们。</text>
 
@@ -75,10 +73,11 @@ ui.layout(
 					 
 					 <text margin="10 5" textColor="#ff0000">完全免费！仅供测试和学习交流，严禁用于任何违规违法行为！导致的一切后果与本助手无关！</text>
 					 
-					 <card id="miaohui" w="*" h="70" margin="10 20 10 10" cardCornerRadius="2dp" cardElevation="1dp" gravity="center_vertical">
+					 <card id="miaohui" w="*" h="90" margin="10 20 10 10" cardCornerRadius="2dp" cardElevation="1dp" gravity="center_vertical">
                         <vertical padding="18 8" h="auto">
-                            <text text="点击下载更新喵惠助手" gravity="center" textColor="#000000" textSize="16sp"/>
-                            <text text="喵惠APP—我的页面—联系客服获取更新" gravity="center" textColor="#ff5050" textSize="14sp"/>
+                            <text text="点击下载喵惠APP获取喵惠助手更新" gravity="center" textColor="#000000" textSize="16sp"/>
+                            <text text="喵惠APP—我的页面—联系在线客服获取更新" gravity="center" textColor="#ff5050" textSize="14sp"/>
+							<text text="→仅限喵惠APP领券下单返现的用户获取更新←" gravity="center" textColor="#ff5050" textSize="12sp"/>
                         </vertical>
                     <View h="*" w="10"/>
                     </card>
@@ -120,14 +119,6 @@ app.openUrl("https://u.jd.com/JwjrLXc")
 
 ui.pddhb.click(function(){
 app.openUrl("https://p.pinduoduo.com/xrMIi8eR")
-});
-
-ui.elmhb.click(function(){
-app.openUrl("https://m.tb.cn/h.fHIs0cu")
-});
-
-ui.mtwmhb.click(function(){
-app.openUrl("https://click.meituan.com/t?t=1&c=2&p=fUlcU75zyxoL#waimaimtid33")
 });
 
 ui.youhuiquan.click(function(){
