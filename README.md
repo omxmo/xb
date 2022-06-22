@@ -3,6 +3,7 @@
 # 实时线报   🎁
 |更新时间|活动线报|参与方式|
 | :------------: | :------------: | :------------: |
+|6月22日|`91折` 话费充值|[点击链接](https://wndh.net/u/?cid=BdoqeVbW&tmp=prepaid_recharge&code=BdoqeVbW&sp=&pr_cate_id=0#/sp)|
 |6月18日|`最高19618元` 京东超级红包|[点击链接](https://u.jd.com/JwjrLXc)|
 |6月18日|`最高22888元` 天猫超级红包|[点击链接](https://m.tb.cn/h.ftZMHwC)|
 
