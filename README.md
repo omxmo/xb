@@ -1,6 +1,27 @@
 - 你的 `Star` 是长期更新的动力！
 
 # 实时线报   🎁
+三网话费超值充！
+慢充0-72h到账～
+
+联通47.99 充50        
+https://u.jd.com/jwIU7vH 
+联通94.99 充100    
+https://u.jd.com/jCIkmDh 
+联通187.98 充200 
+https://u.jd.com/jwIjjPi 
+电信46.99 充50        
+https://u.jd.com/jLI9C2B 
+电信94.99 充100    
+https://u.jd.com/jMIXpnc 
+电信187.98 充200 
+https://u.jd.com/jMI9v6a 
+移动48.5 充50        
+https://u.jd.com/jKIXbsA 
+移动97.99 充100    
+https://u.jd.com/jIIlr0M 
+移动191.98 充200 
+https://u.jd.com/jLIfhRN
 |更新时间|活动线报|参与方式|
 | :------------: | :------------: | :------------: |
 |6月27日|`免费Apple Music会员` 2个月Apple Music会员|[点击链接](https://redeem.apple.com/am-genshin-impact-2mo-zh-cn?origin=&locale=zh-CN)|
