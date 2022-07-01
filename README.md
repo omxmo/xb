@@ -3,27 +3,6 @@
 # 实时线报   🎁
 |更新时间|活动线报|参与方式|
 | :------------: | :------------: | :------------: |
-|7月1日|`话费93折起` 充值话费|三网话费超值充！
-慢充0-72h到账～
-
-联通47.99 充50        
-https://u.jd.com/jwIU7vH 
-联通94.99 充100    
-https://u.jd.com/jCIkmDh 
-联通187.98 充200 
-https://u.jd.com/jwIjjPi 
-电信46.99 充50        
-https://u.jd.com/jLI9C2B 
-电信94.99 充100    
-https://u.jd.com/jMIXpnc 
-电信187.98 充200 
-https://u.jd.com/jMI9v6a 
-移动48.5 充50        
-https://u.jd.com/jKIXbsA 
-移动97.99 充100    
-https://u.jd.com/jIIlr0M 
-移动191.98 充200 
-https://u.jd.com/jLIfhRN|
 |6月27日|`免费Apple Music会员` 2个月Apple Music会员|[点击链接](https://redeem.apple.com/am-genshin-impact-2mo-zh-cn?origin=&locale=zh-CN)|
 |6月22日|`100元打车券` 高德打车|[点击链接](https://cache.amap.com/activity/2020TaxiGetNew/index.html?gd_from=4k1Su5Z6RjQ&pid=mm_1391100045_2275350156_111487350042)|
 |6月22日|`91折` 话费充值|[点击链接](https://wndh.net/u/?cid=BdoqeVbW&tmp=prepaid_recharge&code=BdoqeVbW&sp=&pr_cate_id=0#/sp)|
