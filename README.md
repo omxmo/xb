@@ -3,8 +3,8 @@
 # 实时线报   🎁
 |更新时间|活动线报|参与方式|
 | :------------: | :------------: | :------------: |
-|7月1日|`话费91折起` 充值话费|联通47.99充50：https://u.jd.com/jwIU7vH  
-联通94.99充100：https://u.jd.com/jCIkmDh  
+|7月1日|`话费91折起` 充值话费|联通47.99充50：https://u.jd.com/jwIU7vH  |
+||联通94.99充100：https://u.jd.com/jCIkmDh  |
 联通187.98充200：https://u.jd.com/jwIjjPi  
 电信46.99充50：https://u.jd.com/jLI9C2B  
 电信94.99充100：https://u.jd.com/jMIXpnc  
