@@ -49,5 +49,5 @@
 ![](https://github.com/omxmo/xb/blob/main/qg.png)  
 ![](https://github.com/omxmo/xb/blob/main/bp.png)  
   
-# 提示   ❗
+# ❗提示   
 仅供测试和学习交流，严禁用于违法违规行为！！！
