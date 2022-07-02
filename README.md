@@ -3,6 +3,7 @@
 # 实时线报   🎁
 |更新时间|活动线报|参与方式|
 | :------------: | :------------: | :------------: |
+|7月1日|
 |7月1日|`91折` 话费充值|[点击链接](https://wndh.net/u/?cid=BdoqeVbW&tmp=prepaid_recharge&code=BdoqeVbW&sp=&pr_cate_id=0#/sp)|
 |6月27日|`免费Apple Music会员` 2个月Apple Music会员|[点击链接](https://redeem.apple.com/am-genshin-impact-2mo-zh-cn?origin=&locale=zh-CN)|
 |6月22日|`100元打车券` 高德打车|[点击链接](https://cache.amap.com/activity/2020TaxiGetNew/index.html?gd_from=4k1Su5Z6RjQ&pid=mm_1391100045_2275350156_111487350042)|
