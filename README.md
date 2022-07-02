@@ -1,7 +1,7 @@
 - 你的 `Star` 是长期更新的动力！！
 
 # 实时线报   🎁
-实时线报聚合：[点击链接](https://wndh.net/u/?cid=BdoqeVbW&tmp=rt_xb&code=BdoqeVbW&sp=#/sp)  
+🧧实时线报聚合：[点击链接](https://wndh.net/u/?cid=BdoqeVbW&tmp=rt_xb&code=BdoqeVbW&sp=#/sp)  
 |更新时间|活动线报|参与方式|
 | :------------: | :------------: | :------------: |
 |7月1日|`91折` 话费充值|[点击链接](https://wndh.net/u/?cid=BdoqeVbW&tmp=prepaid_recharge&code=BdoqeVbW&sp=&pr_cate_id=0#/sp)|
