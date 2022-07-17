@@ -4,6 +4,7 @@
 🧧实时线报聚合：[点击链接](https://wndh.net/u/?cid=BdoqeVbW&tmp=rt_xb&code=BdoqeVbW&sp=#/sp)  
 |更新时间|活动线报|参与方式|
 | :------------: | :------------: | :------------: |
+|7月17日|`免费会员` QQ音乐绿钻会员|[点击链接](https://y.qq.com/cact/summer2022/home/index.html)|
 |7月3日|`免费会员` 京东到家月卡|[点击链接](https://daojia.jd.com/taroh5/h5dist/#/pages/differentIndustry-t/index?channel=jindongplus)|
 |7月1日|`91折` 话费充值|[点击链接](https://wndh.net/u/?cid=BdoqeVbW&tmp=prepaid_recharge&code=BdoqeVbW&sp=&pr_cate_id=0#/sp)|
 |6月27日|`免费Apple Music会员` 2个月Apple Music会员|[点击链接](https://redeem.apple.com/am-genshin-impact-2mo-zh-cn?origin=&locale=zh-CN)|
