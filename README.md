@@ -1,6 +1,6 @@
 - 你的 `Star` 是长期更新的动力！
 
-# 抢购助手+天猫/京东双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi
+## 抢购助手+天猫/京东双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi
 
 # 🧧实时线报   
 🧧实时线报聚合：[点击链接](https://wndh.net/u/)  
@@ -52,4 +52,4 @@
 ![](https://github.com/omxmo/xb/blob/main/bp.png)  
   
 # ❗提示   
-仅供测试和学习交流，严禁用于违法违规行为！！！
+仅用于对视觉障碍人士辅助操作的测试和学习交流，严禁用于任何违法违规商业行为！！！
