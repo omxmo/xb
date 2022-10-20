@@ -1,26 +1,26 @@
 - 你的 `Star` 是长期更新的动力！
 
-##### 天猫/京东双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi
+##### 抢购助手+天猫/京东双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi
 
 # 🧧实时线报   
-🧧实时线报聚合：[点击链接](https://wndh.net/u/?cid=BdoqeVbW&tmp=rt_xb&code=BdoqeVbW&sp=#/sp)  
+🧧实时线报聚合：[点击链接](https://wndh.net/u/)  
 |更新时间|活动线报|参与方式|
 | :------------: | :------------: | :------------: |
-|7月17日|`免费会员` QQ音乐绿钻会员|[点击链接](https://y.qq.com/cact/summer2022/home/index.html)|
-|7月3日|`免费会员` 京东到家月卡|[点击链接](https://daojia.jd.com/taroh5/h5dist/#/pages/differentIndustry-t/index?channel=jindongplus)|
-|7月1日|`91折` 话费充值|[点击链接](https://wndh.net/u/?cid=BdoqeVbW&tmp=prepaid_recharge&code=BdoqeVbW&sp=&pr_cate_id=0#/sp)|
-|6月27日|`免费Apple Music会员` 2个月Apple Music会员|[点击链接](https://redeem.apple.com/am-genshin-impact-2mo-zh-cn?origin=&locale=zh-CN)|
+|10月20日|`22888元` 天猫红包|[点击链接](https://s.click.taobao.com/PZ1XOSu)|
+|10月20日|`11111元` 京东红包|[点击链接](https://u.jd.com/kdQSLLK)|
+|10月20日|`91折` 话费充值|[点击链接](https://u.jd.com/kIQBS0B)|
+|10月20日|`最新红利风口` 抖音/快手官方返现项目|[点击链接](https://sj.qq.com/appdetail/com.miaohui.xin)|
 |6月22日|`100元打车券` 高德打车|[点击链接](https://cache.amap.com/activity/2020TaxiGetNew/index.html?gd_from=4k1Su5Z6RjQ&pid=mm_1391100045_2275350156_111487350042)|
 |6月18日|`最高19618元` 京东超级红包|[点击链接](https://u.jd.com/JwjrLXc)|
 |6月18日|`最高22888元` 天猫超级红包|[点击链接](https://m.tb.cn/h.ftZMHwC)|
 
 ### 线报群
-618实时线报QQ群：[点击加入](https://jq.qq.com/?_wv=1027&k=JuvO5aov "点击加入")  
+618实时线报QQ群：[点击加入](https://jq.qq.com/?_wv=1027&k=AHvNzvoC "点击加入")  
 微信群，扫码添加微信邀请加入，备注：线报  
 ![](https://github.com/omxmo/xb/blob/main/wx.png)
 
 ### 线报聚合APP  
-活动太多，为了方便大家随时随地获取最新新报，做成了一个聚合APP，点击下载：[点击链接](https://a.app.qq.com/o/simple.jsp?pkgname=com.miaohui.xin)
+活动太多，为了方便大家随时随地获取最新新报，做成了一个聚合APP，点击下载：[点击链接](https://sj.qq.com/appdetail/com.miaohui.xin)
 |主流电商|外卖点餐|出行|充值|
 | :------------: | :------------: | :------------: | :------------: |
 |淘宝 `领券返现`|饿了么 `66元红包`|高德打车 `100元打车券`|话费 `93元充100元`|
