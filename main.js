@@ -15,18 +15,19 @@ ui.layout(
 					
 					<frame w="*" margin="10" h="1" bg="#ff8080" />
 					
-				    <button id="tmhb" text="每天最高领取天猫22888元红包" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
-					<button id="jdhb" text="每天最高领取京东19618元红包" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
-					<button id="pddhb" text="拼多多30亿红包雨" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
-					<button id="youhuiquan" text="话费充值91折！一对一指导，合伙人月入过万！" margin="10 3" textColor="#111111"/>
+				    <button id="tmhb" text="每天领天猫22888元红包（10月24日20点开始）" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
+					<button id="jdhb" text="每天领京东11111元红包（10月28日12点开始）" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
+					<button id="pddhb" text="每天领拼多多超级红包" margin="10 3" textColor="#ffffff" bg="#ff5050"/>
+					<button id="youhuiquan" text="最新红利风口！抖音/快手官方返现项目！" margin="10 3" textColor="#111111"/>
+					<button id="huafei" text="移动/联通/电信91折话费（91元充值100元）" margin="10 3" textColor="#111111"/>
 					
 					
 					<frame w="*" margin="10" h="1" bg="#ff8080" />
 					
 					<card id="start_ui" w="*" h="70" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" gravity="center_vertical">
                         <vertical padding="18 8" h="auto">
-                            <text text="某猫/某东618任务助手" textColor="#222222" textSize="16sp"/>
-                            <text text="支持自动完成某猫/某东618任务，领取奖励" textColor="#999999" textSize="14sp"/>
+                            <text text="某猫/某东双11任务助手" textColor="#222222" textSize="16sp"/>
+                            <text text="支持自动完成某猫/某东双11任务，领取奖励" textColor="#999999" textSize="14sp"/>
                         </vertical>
                     <View bg="#ce0000" h="*" w="10"/>
                     </card>
@@ -65,7 +66,7 @@ ui.layout(
                 </frame>
                 <frame>
 				    <vertical>
-                     <text margin="10 5" w="*" gravity="center" textSize="18sp">喵惠助手V1.3.9</text>
+                     <text margin="10 5" w="*" gravity="center" textSize="18sp">喵惠助手V1.4.1</text>
 					 <text margin="10 5">喵惠助手是一款基于安卓系统的辅助脚本工具，模拟人工在手机屏幕上点击，实现自动化操作，方便、快捷、安全，没有任何病毒。</text>
 					 <text margin="10 5">部分功能是整合互联网已有开源包和工具。长期优化更新，更多功能陆续增加中……获取源码请联系我们。</text>
 
@@ -77,7 +78,7 @@ ui.layout(
                         <vertical padding="18 8" h="auto">
                             <text text="点击下载喵惠APP获取喵惠助手更新" gravity="center" textColor="#000000" textSize="16sp"/>
                             <text text="喵惠APP—我的页面—联系在线客服获取更新" gravity="center" textColor="#ff5050" textSize="14sp"/>
-							<text text="→仅限喵惠APP领券下单返现的用户获取更新←" gravity="center" textColor="#ff5050" textSize="12sp"/>
+							<text text="→最新红利风口+抖音/快手官方返现项目←" gravity="center" textColor="#ff5050" textSize="12sp"/>
                         </vertical>
                     <View h="*" w="10"/>
                     </card>
@@ -110,25 +111,29 @@ ui.autoService.checked = auto.service != null;    });
 
 //红包//////////
 ui.tmhb.click(function(){
-app.openUrl("https://m.tb.cn/h.ftZMHwC")
+app.openUrl("https://s.click.taobao.com/PZ1XOSu")
 });
 
 ui.jdhb.click(function(){
-app.openUrl("https://u.jd.com/JwjrLXc")
+app.openUrl("https://u.jd.com/kdQSLLK")
 });
 
 ui.pddhb.click(function(){
-app.openUrl("https://p.pinduoduo.com/xrMIi8eR")
+app.openUrl("https://p.pinduoduo.com/VHC6Z8iw")
 });
 
 ui.youhuiquan.click(function(){
-app.openUrl("https://a.app.qq.com/o/simple.jsp?pkgname=com.miaohui.xin")
+app.openUrl("https://sj.qq.com/appdetail/com.miaohui.xin")
+});
+
+ui.huafei.click(function(){
+app.openUrl("https://u.jd.com/kIQBS0B")
 });
 
 
 //喵惠下载
 ui.miaohui.click(function(){
-app.openUrl("https://a.app.qq.com/o/simple.jsp?pkgname=com.miaohui.xin")
+app.openUrl("https://sj.qq.com/appdetail/com.miaohui.xin")
 });
 
 //使用教程
