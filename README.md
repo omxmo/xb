@@ -1,5 +1,7 @@
 - 你的 `Star` 是长期更新的动力！
 
+##### 天猫/京东双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi
+
 # 🧧实时线报   
 🧧实时线报聚合：[点击链接](https://wndh.net/u/?cid=BdoqeVbW&tmp=rt_xb&code=BdoqeVbW&sp=#/sp)  
 |更新时间|活动线报|参与方式|
