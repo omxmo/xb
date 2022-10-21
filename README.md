@@ -1,4 +1,4 @@
-- 你的 `Star` 是长期更新的动力！
+- 你的 `Star` 是长期更新的动力！！
 
 ## 抢购助手+天猫/京东双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi
 
