@@ -6,7 +6,7 @@
 🧧实时线报聚合：[点击链接](https://wndh.net/u/)  
 |更新时间|活动线报|参与方式|
 | :------------: | :------------: | :------------: |
-|10月20日|天猫红包 `22888元`|[点击链接](https://s.click.taobao.com/PZ1XOSu)|
+|10月20日|天猫红包 `22888元`|[点击链接](https://m.tb.cn/h.UeDBeDA)|
 |10月20日|京东红包 `11111元`|[点击链接](https://u.jd.com/kdQSLLK)|
 |10月20日|话费充值 `91折`|[点击链接](https://u.jd.com/kIQBS0B)|
 |10月20日|抖音/快手官方返现项目 `最新红利风口`|[点击链接](https://sj.qq.com/appdetail/com.miaohui.xin)|
