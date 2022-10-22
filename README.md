@@ -1,6 +1,6 @@
 - 你的 `Star` 是长期更新的动力！！
 
-## 抢购助手+天猫/京东双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi
+## 2022年天猫/京东双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi
 
 # 🧧实时线报   
 🧧实时线报聚合：[点击链接](https://wndh.net/u/)  
