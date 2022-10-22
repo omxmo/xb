@@ -1,7 +1,7 @@
 - 你的 `Star` 是长期更新的动力！！
 
 ## 2022年天猫/京东双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi
-.10月22日更新
+10月22日更新
 
 # 🧧实时线报   
 🧧实时线报聚合：[点击链接](https://wndh.net/u/)  
@@ -15,7 +15,7 @@
 |10月12日|高德打车 `100元打车券`|[点击链接](https://cache.amap.com/activity/2020TaxiGetNew/index.html?gd_from=4k1Su5Z6RjQ&pid=mm_1391100045_2275350156_111487350042)|
 
 ### 线报群
-实时线报QQ群：[点击加入](https://jq.qq.com/?_wv=1027&k=HiqvBsya "点击加入")  
+实时线报QQ群：[点击加入](https://jq.qq.com/?_wv=1027&k=wXNzwxRL "点击加入")  
 微信群，扫码添加微信邀请加入，备注：线报  
 ![](https://github.com/omxmo/xb/blob/main/wx.png)
 
