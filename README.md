@@ -1,7 +1,7 @@
 - 你的 `Star` 是长期更新的动力！
 
-## 2022年天猫/京东双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi
-10月25日更新
+## 2022年天猫/京东双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi  
+直接点击链接安装APK文件，或者使用AutoJS运行start和start_jd文件
 
 # 🧧实时线报   
 🧧实时线报聚合：[点击链接](https://wndh.net/u/)  
