@@ -1,6 +1,6 @@
 - 你的 `Star` 是长期更新的动力！！
 
-## 10月26日更新  
+## 10月27日更新  
 2022年天猫喵果总动员/京东穿行寻宝双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi  
 直接点击链接安装APK文件，或者使用AutoJS运行zrw_tmrw.js和zrw_jdrw.js文件
 
