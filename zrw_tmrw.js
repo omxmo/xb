@@ -55,6 +55,8 @@ console.log('按音量下键停止')
 
 device.keepScreenDim(60 * 60 * 1000)
 
+let startCoin;
+
 function registerKey() {
     try {
         events.observeKey()
@@ -66,6 +68,9 @@ function registerKey() {
     events.onKeyDown('volume_down', function (event) {
         console.log('喵果任务脚本停止了')
         console.log('请手动切换回主页面')
+        if (startCoin) {
+            console.log('本次任务开始时有', startCoin, '喵果')
+        }
         device.cancelKeepingAwake()
         exit()
     })
@@ -138,7 +143,7 @@ try {
                     sleep(8000)
                     return findTask()
                 }
-                if (!(taskName.match(/淘金币|提醒|开通|话费|斗地主|消消乐|流浪猫|开88|扔喵果|占领|邀请|登录|组队|参与|施肥|浇水|特价版|小鸡|消除|穿搭|森林|点淘|人生|我的淘宝|庄园|支付宝/) || content.match(/小互动/))) {
+                if (!(taskName.match(/淘金币|提醒|开通|续费|乐园|话费|斗地主|消消乐|流浪猫|开88|扔喵果|占领|邀请|登录|组队|参与|施肥|浇水|特价版|小鸡|消除|穿搭|森林|点淘|人生|我的淘宝|庄园|支付宝/) || content.match(/小互动/))) {
                     return [taskName, jumpButtons[i]]
                 }
             }
@@ -234,6 +239,21 @@ try {
         }
     }
 
+    // 喵果数量
+    function getCoin() {
+        console.log('获取喵果数量')
+        try {
+            let e = textContains('当前喵果').findOnce()
+            let num = e.text().match(/当前喵果(\d*)/)[1]
+            console.log('当前共有', num, '喵果')
+            return num
+        } catch (err) {
+            console.log(err)
+            console.log('获取喵果数量错误，不影响脚本运行')
+            return null
+        }
+    }
+
     try {
         if (autoOpen) {
             // 打开淘宝活动页面
@@ -300,6 +320,8 @@ try {
         quit()
     }
 
+    startCoin = getCoin()
+
     while (true) {
         console.log('寻找任务入口...')
         var jumpButton = findTask()
@@ -318,8 +340,13 @@ try {
                 }
             }
 
+            const endCoin = getCoin()
+
             console.log('没找到合适的任务。也许任务已经全部做完了。退出。互动任务不会自动完成。')
             console.log('请手动切换回主页面')
+            if (startCoin && endCoin) {
+                console.log('本次任务共获得', (endCoin - startCoin), '喵果')
+            }
             alert('任务已完成', '别忘了在脚本主页领取双十一红包！互动任务需要手动完成。')
             quit()
         }
