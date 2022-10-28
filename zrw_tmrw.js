@@ -316,7 +316,7 @@ try {
         sleep(2000)
     } catch (err) {
         console.log(err)
-        console.log('无法进入任务列表，如果你认为这是bug，请截图反馈')
+        console.log('无法进入任务列表，如果你认为这是bug，请截图反馈。注意！1级没法做任务，请先升到2级！')
         quit()
     }
 
