@@ -111,7 +111,7 @@ function openAndInto() {
 
     app.startActivity({
         action: "VIEW",
-        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/xLtvAsb","M_sourceFrom":"mxz","msf_type":"auto"}'
+        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/xIizM1A","M_sourceFrom":"mxz","msf_type":"auto"}'
     })
 }
 
@@ -218,7 +218,7 @@ function getTaskByText() {
             if (tCount) { // 如果数字相减不为0，证明没完成
                 tText = tmp.child(1).text()
                 if (!autoJoin && tText.match(/成功入会/)) continue
-                if (tTitle.match(/下单|小程序/)) continue
+                if (tTitle.match(/下单|小程序|裂变/)) continue
                 tButton = button
                 break
             }
