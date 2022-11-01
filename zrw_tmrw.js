@@ -258,7 +258,7 @@ try {
         if (autoOpen) {
             // 打开淘宝活动页面
             console.log('正在打开淘宝...')
-            var url = 'pages.tmall.com/wow/z/hdwk/2022d11/singlegame?disableNav=YES&qd_from=tbsybutton&ali_trackid=2:mm_1391100045_2014900139_110817650007'
+            var url = 'pages.tmall.com/wow/z/hdwk/2022d11/singlegame?disableNav=YES&qd_from=tbsybutton&ali_trackid=2:mm_1391100045_2014900139_110830750257'
 
             app.startActivity({
                 action: "VIEW",
