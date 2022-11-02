@@ -111,7 +111,7 @@ function openAndInto() {
 
     app.startActivity({
         action: "VIEW",
-        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/xLE6Jpp","M_sourceFrom":"mxz","msf_type":"auto"}'
+        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/xKce2xd","M_sourceFrom":"mxz","msf_type":"auto"}'
     })
 }
 
@@ -261,6 +261,7 @@ function timeTask() {
             console.log('进行模拟滑动')
             swipe_flag = 1
             swipe(device.width / 2, device.height - 200, device.width / 2 + 20, device.height - 500, 500)
+            c++
         }
 
         // 弹窗处理

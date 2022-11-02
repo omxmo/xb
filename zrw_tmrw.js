@@ -164,10 +164,11 @@ try {
         let finish_c = 0
         let countdown = 0
         console.log('开始检测任务完成，部分控件无法检测，会在30秒后自动返回，请耐心等待。')
-        while (finish_c < 300) { // 0.1 * 300 = 30 秒，防止死循环
+        while (finish_c < 250) { // 0.1 * 250 = 25 秒，防止死循环
             if (textMatches(/.*下拉浏览.*/).exists()) {
                 console.log('进行模拟滑动')
                 swipe(device.width / 2, device.height - 200, device.width / 2 + 20, device.height - 500, 2000)
+                finish_c = finish_c + 10
             }
             let finish_reg = /.*任务.*?完成[\s\S]*?|.*失败.*|.*上限.*|.*开小差.*|.*喵果已发放[\s\S]*|.*下单可获得[\s\S]*/
             if (textMatches(finish_reg).exists() || descMatches(finish_reg).exists()) { // 等待已完成出现，有可能失败
@@ -194,6 +195,11 @@ try {
                 console.log('关闭直播购物车')
                 click(x, y - 100)
             }
+            if (finish_c > 100 && finish_c % 10 == 0) {
+                console.log('滑动防止页面卡顿')
+                swipe(device.width / 2, device.height - 200, device.width / 2 + 20, device.height - 500, 500)
+                finish_c = finish_c + 5
+            }
             sleep(100)
             finish_c++
         }
@@ -203,7 +209,7 @@ try {
             sleep(18000)
         }
 
-        if (finish_c > 299) {
+        if (finish_c > 249) {
             console.log('未检测到任务完成标识。返回。')
             // console.log('如果你认为这是一个bug请截图反馈。')
             // console.log('一般情况下，二次运行脚本即可。')
