@@ -188,6 +188,10 @@ try {
                 console.log('跳过互动任务')
                 break
             }
+            if (text('手机淘宝触屏版').exists()) {
+                console.log('页面未加载，返回')
+                break
+            }
             if (text('宝贝口袋').exists()) {
                 let cart = text('购物车').findOnce()
                 let x = cart.bounds().right
