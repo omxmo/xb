@@ -143,7 +143,7 @@ try {
                     sleep(8000)
                     return findTask()
                 }
-                if (!(taskName.match(/淘金币|提醒|开通|续费|乐园|话费|斗地主|消消乐|流浪猫|开88|扔喵果|占领|邀请|登录|组队|参与|施肥|浇水|特价版|小鸡|消除|穿搭|森林|点淘|人生|我的淘宝|庄园|支付宝|点击人物/) || content.match(/小互动/))) {
+                if (!(taskName.match(/淘金币|提醒|开通|续费|乐园|话费|斗地主|消消乐|流浪猫|开88|扔喵果|占领|邀请|登录|组队|参与|施肥|浇水|特价版|小鸡|消除|穿搭|森林|点淘|人生|我的淘宝|庄园|支付宝|点击人物|省钱卡/) || content.match(/小互动|开通/))) {
                     return [taskName, jumpButtons[i]]
                 }
             }
@@ -170,7 +170,7 @@ try {
                 swipe(device.width / 2, device.height - 200, device.width / 2 + 20, device.height - 500, 2000)
                 finish_c = finish_c + 10
             }
-            let finish_reg = /.*任务.*?完成[\s\S]*?|.*失败.*|.*上限.*|.*开小差.*|.*喵果已发放[\s\S]*|.*下单可获得[\s\S]*/
+            let finish_reg = /.*任务.*?完成[\s\S]*?|.*失败.*|.*上限.*|.*开小差.*|.*喵果已发放[\s\S]*|.*下单可获得[\s\S]*|任务已经/
             if (textMatches(finish_reg).exists() || descMatches(finish_reg).exists()) { // 等待已完成出现，有可能失败
                 break
             }
@@ -199,9 +199,15 @@ try {
                 console.log('关闭直播购物车')
                 click(x, y - 100)
             }
-            if (finish_c > 100 && finish_c % 10 == 0) {
+            if (text('立即关注得喵果').exists()) {
+                console.log('关注直播间任务，点击关注按钮')
+                text('立即关注得喵果').click()
+                sleep(1000)
+                break
+            }
+            if (finish_c > 100 && finish_c % 50 == 0) {
                 console.log('滑动防止页面卡顿')
-                swipe(device.width / 2, device.height - 200, device.width / 2 + 20, device.height - 500, 500)
+                swipe( device.width / 2, device.height - 400, device.width / 2 + 20, device.height - 500, 500)
                 finish_c = finish_c + 5
             }
             sleep(100)
