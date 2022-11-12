@@ -1,16 +1,9 @@
 - 你的 `Star` 是长期更新的动力
 
-## 11月11日更新  
-2022年天猫喵果总动员/京东穿行寻宝双11任务自动助手下载：https://wwc.lanzouv.com/b01cfbrbi  
-直接点击链接安装APK文件，或者使用AutoJS运行zrw_tmrw.js和zrw_jdrw.js文件
-
 # 🧧实时线报   
 🧧实时线报聚合：[点击链接](https://wndh.net/u/)  
 |更新时间|活动线报|参与方式|
 | :------------: | :------------: | :------------: |
-|11月1日|天猫红包 `22888元`|[点击链接](https://m.tb.cn/h.UeDBeDA)|
-|11月1日|京东红包 `11111元`|[点击链接](https://u.jd.com/kKxsUR0)|
-|10月26日|天猫预售 `免定金元`|[点击链接](https://m.tb.cn/h.UVwxTR)|
 |10月20日|话费充值 `91折`|[点击链接](https://u.jd.com/kIQBS0B)|
 |10月20日|抖音/快手官方返现项目 `最新红利风口`|[点击链接](https://sj.qq.com/appdetail/com.miaohui.xin)|
 |10月12日|高德打车 `100元打车券`|[点击链接](https://cache.amap.com/activity/2020TaxiGetNew/index.html?gd_from=4k1Su5Z6RjQ&pid=mm_1391100045_2275350156_111487350042)|
