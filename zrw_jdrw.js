@@ -101,9 +101,9 @@ function findTextDescMatchesTimeout(reg, timeout) {
 
 // 打开京东进入活动
 function openAndInto() {
-    console.log('正在打开京东APP...')
+    console.log('正在打开京东App...')
     if (!launch('com.jingdong.app.mall')) {
-        console.log('可能未安装京东APP')
+        console.log('可能未安装京东App')
     }
 
     sleep(2000)
@@ -111,7 +111,7 @@ function openAndInto() {
 
     app.startActivity({
         action: "VIEW",
-        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/mCytuYG","M_sourceFrom":"mxz","msf_type":"auto"}'
+        data: 'openApp.jdMobile://virtual?params={"category":"jump","action":"to","des":"m","sourceValue":"JSHOP_SOURCE_VALUE","sourceType":"JSHOP_SOURCE_TYPE","url":"https://u.jd.com/mwBLYaI","M_sourceFrom":"mxz","msf_type":"auto"}'
     })
 }
 
@@ -138,16 +138,30 @@ function openTaskList() {
         console.log('未能定位任务列表，请关闭京东重新运行！')
         quit()
     }
-    let taskListButton
     if (anchor.indexInParent() < 3) {
         anchor = anchor.parent()
-        taskListButton = anchor.parent().child(5).child(1)
-    } else {
-        taskListButton = anchor.parent().child(5).child(1)
     }
-    
+
+    let taskListButton
+    let tmp = anchor.parent().children()
+    for (let i = 0; i < tmp.length; i++) {
+        if (tmp[i].bounds().centerX() == anchor.bounds().centerX() && tmp[i].bounds().centerY() == anchor.bounds().centerY()) {
+            console.log(1)
+            taskListButton = tmp[i + 1].child(1)
+            if (!taskListButton.clickable()) {
+                try {
+                    taskListButton = taskListButton.child(0)
+                } catch (err) {
+                    console.log('不可点击')
+                    taskListButton = null
+                }
+            }
+            break
+        }
+    }
+
     if (!taskListButton || !taskListButton.clickable()) {
-        console.log('无法找到任务列表控件')
+        console.log('无法找到任务列表控件，请参照软件内的说明更换web内核。')
         quit()
     }
     taskListButton.click()
@@ -175,12 +189,17 @@ function closeTaskList() {
 
     anchor = anchor.parent()
 
-    let closeBtn = anchor.child(anchor.childCount() - 2)
+    let closeBtn = anchor.child(anchor.childCount() - 2) // tbs
+    if (!closeBtn.clickable()) {
+        closeBtn = anchor.child(anchor.childCount() - 1) // webview
+    }
+
     return closeBtn.click()
 }
 
 // 重新打开任务列表
 function reopenTaskList() {
+    sleep(3000)
     closeTaskList()
     sleep(3000)
     openTaskList()
@@ -194,26 +213,26 @@ function getTaskByText() {
         tCount = 0,
         tTitle = null
     console.log('寻找未完成任务...')
-    let anchor = textMatches(/^(去完成|去领取|去打卡)$/).findOnce()
+    let anchor = textMatches(/^(去完成|去打卡)$/).findOnce()
     if (anchor) { // 如果找不到任务，直接返回
         let tasks = anchor.parent().parent().parent().children()
         tasks.pop()
 
-        for (let i = 0; i < tasks.length; i+=5) {
-            let task = tasks.slice(i, i+5)
+        for (let i = 0; i < tasks.length; i += 5) {
+            let task = tasks.slice(i, i + 5)
             try {
                 tTitle = task[1].text()
 
                 let r = task[2].text().match(/(\d*)\/(\d*)/)
                 if (!r) continue
                 tCount = (r[2] - r[1])
-                
+
                 console.log(tTitle, tCount)
-            
+
                 button = task[4]
-                if (! button.child(0).child(0).text().match(/去完成|去领取|去打卡/)) continue
-                log(tasks)
-                
+                if (!button.child(0).child(0).text().match(/去完成|去领取|去打卡/)) continue
+                // log(tasks)
+
                 if (tCount) { // 如果数字相减不为0，证明没完成
                     tText = task[3].text()
                     if (!autoJoin && tText.match(/成功入会/)) continue
@@ -221,7 +240,7 @@ function getTaskByText() {
                     tButton = button
                     break
                 }
-            } catch(err) {
+            } catch (err) {
                 console.log(err)
             }
         }
@@ -235,7 +254,7 @@ function getTaskByText() {
 function backToList() {
     sleep(500)
     back()
-    for (let i = 0; i < 3; i++) { // 尝试返回3次
+    for (let i = 0; i < 5; i++) { // 尝试返回3次
         if (!findTextDescMatchesTimeout(/累计任务奖励/, 5000)) {
             console.log('返回失败，重试返回')
             sleep(2000)
@@ -321,13 +340,13 @@ function joinTask() {
             return false
         }
 
-       
+
         if (check.indexInParent() == 2) {
             check = check.parent().child(1)
         } else {
             let anchor = textContains('*****').findOnce()
             check = anchor.parent().child(anchor.indexInParent() + 2)
-            if (! check.bounds().top >= anchor.bounds().bottom) {
+            if (!check.bounds().top >= anchor.bounds().bottom) {
                 console.log('使用第二种方法获取控件')
                 let check1 = anchor.parent().children().findOne(filter(function (w) {
                     if (w.className().match(/ImageView/) && w.bounds().top >= anchor.bounds().bottom) {
@@ -502,7 +521,15 @@ function doTask(tButton, tText, tTitle) {
         return tFlag
     }
 
-    if (tText.match(/浏览并关注.*s|浏览.*s/)) {
+    if (tText.match(/品牌墙/) || tTitle.match(/品牌墙/)) {
+        if (tTitle.match(/浏览更多权益/)) {
+            console.log('简单品牌墙任务，等待10s')
+            sleep(10000)
+            return true
+        }
+        tFlag = wallTask()
+        return tFlag // 品牌墙无需backToList，提前返回
+    } else if (tText.match(/浏览并关注.*s|浏览.*s/)) {
         console.log('进行', tText)
         tFlag = timeTask()
     } else if (tText.match(/累计浏览/)) {
@@ -521,14 +548,6 @@ function doTask(tButton, tText, tTitle) {
         } else {
             tFlag = viewTask()
         }
-    } else if (tText.match(/品牌墙/)) {
-        if (tTitle.match(/浏览更多权益/)) {
-            console.log('简单品牌墙任务，等待10s')
-            sleep(10000)
-            return true
-        } 
-        tFlag = wallTask()
-        return tFlag // 品牌墙无需backToList，提前返回
     } else if (tText.match(/打卡|首页/)) {
         tFlag = clickFlag // 打卡点击一次即可
         return tFlag
