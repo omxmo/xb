@@ -2,8 +2,8 @@
 
 # 618任务自动助手  
 自动完成天猫和京东618任务，领取奖励！
-怕麻烦的，直接下载打包版：https://wwhu.lanzouf.com/b01cfbrbi
-想使用源码的，手机安装AutoJS Pro，然后在AutoJS Pro上运行zrw_tmhc.js和zrw_jdrw.js文件
+怕麻烦的，直接下载打包版：https://wwhu.lanzouf.com/b01cfbrbi  
+想使用源码的，手机安装AutoJS Pro，然后在AutoJS Pro上运行zrw_tmhc.js和zrw_jdrw.js文件  
 
 # 🧧实时线报   
 🧧实时线报聚合：[点击链接](https://wndh.net/h/)  
